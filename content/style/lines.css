@@ -1,0 +1,51 @@
+@import url(https://fonts.googleapis.com/css?family=Roboto);
+
+body {
+    font-family: roboto, sans-serif;
+    background-color: rgb(74, 112, 175);
+    color: #fff;
+}
+
+label {
+    display: list-item;
+}
+
+table {
+    border-collapse: collapse;
+    background: rgba(59, 59, 59, 0.24);
+    margin: auto;
+}
+
+td {
+    height: 60px;
+    width: 60px;
+    border: 2px solid #fff;
+}
+
+.red {
+    background: url(../images/red.png) no-repeat 0 0 / cover;
+}
+
+.blue {
+    background: url(../images/blue.png) no-repeat 0 0 / cover;
+}
+
+.green {
+    background: url(../images/green.png) no-repeat 0 0 / cover;
+}
+
+.purple {
+    background: url(../images/purple.png) no-repeat 0 0 / cover;
+}
+
+.pink {
+    background: url(../images/pink.png) no-repeat 0 0 / cover;
+}
+
+.cyan {
+    background: url(../images/cyan.png) no-repeat 0 0 / cover;
+}
+
+.yellow {
+    background: url(../images/yellow.png) no-repeat 0 0 / cover;
+}
