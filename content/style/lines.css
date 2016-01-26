@@ -49,3 +49,6 @@ td {
 .yellow {
     background: url(../images/yellow.png) no-repeat 0 0 / cover;
 }
+.selected {
+    opacity: 0.5;
+}
