@@ -23,7 +23,6 @@ $(function () {
                 return;
             }
             linesGame.moveBall(selectedElement.data('point'), element.data('point'));
-            linesGame.addNewBalls();
             selectedElement = undefined;
             drawBoard(linesGame.options.size);
         });

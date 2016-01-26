@@ -24,6 +24,7 @@
                 that.dashboard.setValue(startPoint, undefined);
                 that.freeCells.replace(endPoint, startPoint);
                 that.score += that.dashboard.remove(endPoint, that.options.removingCount);
+                that.addNewBalls();
             }
         },
         addNewBalls: function () {
