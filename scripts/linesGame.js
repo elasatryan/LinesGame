@@ -12,6 +12,7 @@
                 that.freeCells.add(new Point(i, j));
             }
         }
+        that.score = 0;
         that.addNewBalls();
     }
 
@@ -21,7 +22,8 @@
             if (that.dashboard.hasPath(startPoint, endPoint)) {
                 that.dashboard.setValue(endPoint, that.dashboard.getValue(startPoint));
                 that.dashboard.setValue(startPoint, undefined);
-                that.freeCells.replace(startPoint, endPoint);
+                that.freeCells.replace(endPoint, startPoint);
+                that.score += that.dashboard.remove(endPoint, that.options.removingCount);
             }
         },
         addNewBalls: function () {
@@ -31,10 +33,12 @@
                 colors = getColors(count, that.options.repeat);
             newBalls.forEach(function (item, index) {
                 that.dashboard.setValue(item, colors[index]);
+                that.score += that.dashboard.remove(item, that.options.removingCount);
             });
         },
-        removeBalls: function () {
-            //TODO
+        gameOver: function () {
+            var that = this;
+            return that.freeCells.length == 0;
         }
     });
 
@@ -49,6 +53,7 @@
         }
         return queue;
     }
+
     function verifyOptions(options) {
         var size = options.size,
             ballsCount = options.ballsCount,

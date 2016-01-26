@@ -22,6 +22,14 @@ td {
     border: 2px solid #fff;
 }
 
+h1 {
+    position: absolute;
+    top: 0;
+    text-align: center;
+    width: 100%;
+    z-index: -9999;
+}
+
 .red {
     background: url(../images/red.png) no-repeat 0 0 / cover;
 }
@@ -49,6 +57,7 @@ td {
 .yellow {
     background: url(../images/yellow.png) no-repeat 0 0 / cover;
 }
+
 .selected {
     opacity: 0.5;
 }

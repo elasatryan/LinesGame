@@ -87,6 +87,7 @@
             queue.forEach(function (item) {
                 that.setValue(item, undefined);
             });
+            return queue.length*10;
         }
     });
 
