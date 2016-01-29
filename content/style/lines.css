@@ -6,28 +6,55 @@ body {
     color: #fff;
 }
 
+.settings {
+    width: 200px;
+    display: inline-block;
+    margin: auto;
+    background-color: #9fddff;
+}
+
+input[type="button"] {
+    height: 50px;
+    width: 200px;
+}
+
+input:not([type="button"]) {
+    width: 42px;
+}
+
+strong {
+    text-align: left;
+}
+
 label {
-    display: list-item;
+    line-height: 2;
+    text-align: right;
 }
 
 table {
     border-collapse: collapse;
-    background: rgba(59, 59, 59, 0.24);
+    background: grey;
+    display: inline-block;
     margin: auto;
 }
 
 td {
-    height: 60px;
-    width: 60px;
+    height: 50px;
+    width: 50px;
     border: 2px solid #fff;
 }
 
-h1 {
-    position: absolute;
-    top: 0;
-    text-align: center;
-    width: 100%;
-    z-index: -9999;
+.game {
+    display: inline-block;
+    position: static;
+}
+
+.settings {
+    margin: auto;
+}
+
+.dashboard {
+    margin: auto;
 }
 
 .red {

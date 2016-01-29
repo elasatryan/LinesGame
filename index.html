@@ -2,40 +2,43 @@
 <head>
     <meta charset="utf-8"/>
     <title>Lines, let's play</title>
-    <script src="scripts/lib/jquery-1.12.0.min.js"></script>
+    <script src="scripts/lib/jquery-2.2.0.js"></script>
     <script src="scripts/extension.js"></script>
     <script src="scripts/point.js"></script>
     <script src="scripts/matrix.js"></script>
     <script src="scripts/pool.js"></script>
+    <script src="scripts/gameStep.js"></script>
+    <script src="scripts/gameHistory.js"></script>
     <script src="scripts/linesGame.js"></script>
     <script src="scripts/viewManager.js"></script>
-    <style>
-        @import url('content/style/lines.css');
-    </style>
+    <link rel="stylesheet" type="text/css" href="content/style/lines.css"/>
 </head>
 <body>
-<div class="settings">
-    <label>
-        <strong>Dashboard size:</strong>
-        <input type="number" id="size" min="5" max="10" value="9"/>
-    </label>
-    <label>
-        <strong>Balls count:</strong>
-        <input type="number" id="ballsCount" min="3" max="7" value="3"/>
-    </label>
-    <label>
-        <strong>Allow repeating:</strong>
-        <input type="checkbox" id="repeat" checked="checked"/>
-    </label>
-    <label>
-        <strong>Removing count:</strong>
-        <input type="number" id="removingCount" min="3" max="5" value="3"/>
-    </label>
-    <input type="button" id="newGame" value="NEW GAME"/>
-</div>
-<div>
-    <h1 id="score"></h1>
-    <table class="dashboard"></table>
+<div class="game">
+    <div class="settings">
+        <label>
+            <strong>Dashboard size:</strong>
+            <input type="number" id="size" min="5" max="10" value="9"/>
+        </label>
+        <label>
+            <strong>Balls count:</strong>
+            <input type="number" id="ballsCount" min="3" max="7" value="3"/>
+        </label>
+        <label>
+            <strong>Allow repeating:</strong>
+            <input type="checkbox" id="repeat" checked="checked"/>
+        </label>
+        <label>
+            <strong>Removing count:</strong>
+            <input type="number" id="removingCount" min="3" max="5" value="3"/>
+        </label>
+    </div>
+    <div>
+        <table class="dashboard"></table>
+        <input type="button" id="newGame" value="NEW GAME"/>
+        <button id="undo">Undo</button>
+        <button id="redo">Redo</button>
+    </div>
 </div>
 </body>
 </html>

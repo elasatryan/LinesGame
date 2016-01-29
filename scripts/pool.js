@@ -11,11 +11,10 @@ $.extend(Pool.prototype, {
             }
         });
     },
-//adds all arguments to current Pool
     add: function (point) {
         this.push.apply(this, arguments);
     },
-    getPoint: function (index) {
+    takePoint: function (index) {
         var that = this;
         return that.splice(index, 1)[0];
     },
@@ -23,7 +22,7 @@ $.extend(Pool.prototype, {
         var queue = [],
             that = this;
         for (var i = 0; i < pointsCount && that.length; i++) {
-            queue.push(that.getPoint(Math.randomInt(that.length)));
+            queue.push(that.takePoint(Math.randomInt(that.length)));
         }
         return queue;
     }
