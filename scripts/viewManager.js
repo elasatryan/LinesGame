@@ -33,8 +33,19 @@ $(function () {
             drawStep(linesGame.history.getLastStep());
         });
 
-
     $('#newGame').click(initializeGame);
+
+    $('.undo').click(function () {
+        linesGame.history.undo();
+        var step = linesGame.history.undone[linesGame.history.undone.length - 1];
+        drawStep(step.reverse());
+    });
+    $('.redo').click(function () {
+        linesGame.history.redo();
+        var step = linesGame.history.getLastStep();
+        console.log(step.reverse());
+        drawStep(step.reverse());
+    });
 
     function drawBoard(size) {
         board.empty();
@@ -55,7 +66,6 @@ $(function () {
             var color = linesGame.dashboard.getValue(item);
             $(getPointSelector(item)).addClass(colors[color - 1]);
         });
-        console.log(step.subtrahend);
 
         step.subtrahend.forEach(function (item) {
             $(getPointSelector(item)).removeAttr('class');

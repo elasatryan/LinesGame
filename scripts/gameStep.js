@@ -14,6 +14,15 @@
         addToSubtrahend: function (item) {
             var that = this;
             that.subtrahend.push.apply(that.subtrahend, arguments);
+        },
+        reverse: function () {
+            var that = this,
+                queue;
+
+            queue = that.addend;
+            that.addend = that.subtrahend;
+            that.subtrahend = queue;
+            return that;
         }
     });
     window.GameStep = GameStep;

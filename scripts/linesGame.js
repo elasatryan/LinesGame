@@ -49,7 +49,7 @@
     });
 
     //this function returns random colors queue
-    function getColors(count, repeat) {
+    function getRandomColors(count, repeat) {
         var queue = [];
         while (queue.length < count) {
             var color = Math.randomInt(maxColorsCount) + 1;
@@ -89,7 +89,7 @@
     function addNewBalls(linesGame, step) {
         var count = linesGame.options.ballsCount,
             newBalls = linesGame.freeCells.getRandomPoints(count),
-            colors = getColors(count, linesGame.options.repeat);
+            colors = getRandomColors(count, linesGame.options.repeat);
         newBalls.forEach(function (item, index) {
             linesGame.dashboard.setValue(item, colors[index]);
             var itemsToRemove = linesGame.dashboard.remove(item, linesGame.options.removingCount);
