@@ -33,7 +33,19 @@ $(function () {
             drawStep(linesGame.history.getLastStep());
         });
 
-    $('#newGame').click(initializeGame);
+    $('#newGame').click(function () {
+        initializeGame();
+        $('.settings').hide();
+        $('.settingsBar').toggleClass('open');
+    });
+    $('.generateGame').one('click', function () {
+        $('.game').show();
+        initializeGame();
+    });
+    $('.settingsBar').click(function () {
+        $('.settingsBar').toggleClass('open');
+        $('.settings').toggle();
+    });
 
     $('.undo').click(function () {
         linesGame.history.undo();
