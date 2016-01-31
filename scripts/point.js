@@ -1,4 +1,4 @@
-(function() {
+(function () {
     'use strict';
 
     function Point(row, column) {
@@ -10,19 +10,19 @@
     $.extend(Point.prototype, {
         left: function () {
             var that = this;
-            return new Point(that.row - 1, that.column);
+            return new Point(that.row, that.column - 1);
         },
         right: function () {
             var that = this;
-            return new Point(that.row + 1, that.column);
+            return new Point(that.row, that.column + 1);
         },
         top: function () {
             var that = this;
-            return new Point(that.row, that.column - 1);
+            return new Point(that.row - 1, that.column);
         },
         bottom: function () {
             var that = this;
-            return new Point(that.row, that.column + 1);
+            return new Point(that.row + 1, that.column);
         },
         topLeft: function () {
             var that = this;
