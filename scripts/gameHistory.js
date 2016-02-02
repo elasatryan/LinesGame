@@ -19,7 +19,7 @@
         redo: function () {
             var that = this,
                 item = that.undone.pop();
-            item && that.push(item);
+            return item && (that.push(item), that);
         },
         addStep: function (step) {
             var that = this;
@@ -32,6 +32,10 @@
         getLastStep: function () {
             var that = this;
             return that[that.length - 1];
+        },
+        getScore: function () {
+            var that = this;
+            return that.getLastStep().score;
         }
     });
     window.GameHistory = GameHistory;

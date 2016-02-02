@@ -6,7 +6,6 @@ $(function () {
         ballsSelector = colors.map(function (color) {
             return 'td.' + color;
         }).join(),
-        score = $('#score'),
         size = $('#size'),
         ballsCount = $('#ballsCount'),
         repeat = $('#repeat'),
@@ -31,7 +30,7 @@ $(function () {
             selectedElement.removeClass('selected');
             selectedElement = null;
 
-            drawStep(linesGame.history.getLastStep());
+            drawStep(linesGame.history.getLastStep(), linesGame.getScore());
         });
 
     $('#newGame').click(function () {
@@ -49,13 +48,10 @@ $(function () {
     });
 
     $('.undo').click(function () {
-        var step = linesGame.history.getLastStep();
-        linesGame.history.undo() && drawStep(step.reverse());
+        drawStep(linesGame.undo(), linesGame.getScore());
     });
     $('.redo').click(function () {
-        linesGame.history.redo();
-        var step = linesGame.history.getLastStep();
-        drawStep(step);
+        drawStep(linesGame.redo(), linesGame.getScore());
     });
 
     function drawBoard(size) {
@@ -72,7 +68,10 @@ $(function () {
         }
     }
 
-    function drawStep(step) {
+    function drawStep(step, score) {
+        if (!step) {
+            return;
+        }
         step.addend.forEach(function (item) {
             $(getPointSelector(item.point)).addClass(colors[item.color - 1]);
         });
@@ -80,6 +79,7 @@ $(function () {
         step.subtrahend.forEach(function (item) {
             $(getPointSelector(item.point)).removeAttr('class');
         });
+        $('.score').text(score);
     }
 
     function getPointSelector(point) {

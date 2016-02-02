@@ -9,7 +9,6 @@
         that.dashboard = new Matrix(size);
         that.freeCells = getInitialPool(size);
         that.history = new GameHistory();
-        that.score = 0;
         var step = new GameStep();
         addNewBalls(that, step);
         that.history.addStep(step);
@@ -21,9 +20,10 @@
             if (!that.dashboard.hasPath(startPoint, endPoint)) {
                 return;
             }
-
-            var step = new GameStep(),
+            var previousScore = that.getScore(),
+                step = new GameStep(),
                 color = that.dashboard.getValue(startPoint);
+
             that.dashboard.setValue(endPoint, color);
             that.dashboard.setValue(startPoint, undefined);
             that.freeCells.replace(endPoint, startPoint);
@@ -42,11 +42,25 @@
             addNewBalls(that, step);
 
             that.history.addStep(step);
-
+            modifyMatrixByStep(that.dashboard, step);
+            step.score = previousScore + getScoreByStep(step);
         },
         gameOver: function () {
             var that = this;
             return 0 === that.freeCells.length;
+        },
+        getScore: function () {
+            var that = this;
+            return that.history.getScore();
+        },
+        undo: function () {
+            var that = this,
+                step = that.history.getLastStep();
+            return that.history.undo() && step.reverse();
+        },
+        redo: function () {
+            var that = this;
+            return that.history.redo() && that.history.getLastStep();
         }
     });
 
@@ -107,6 +121,19 @@
         return pointArray && pointArray.map(function (item) {
                 return new Ball(item, color);
             });
+    }
+
+    function modifyMatrixByStep(matrix, step) {
+        step.addend.forEach(function (item) {
+            matrix.setValue(item.point, item.color);
+        });
+        step.subtrahend.forEach(function (item) {
+            matrix.setValue(item.point, undefined);
+        });
+    }
+
+    function getScoreByStep(step) {
+        return step.subtrahend.length > 1 ? step.subtrahend.length : 0;
     }
 
     window.LinesGame = LinesGame;

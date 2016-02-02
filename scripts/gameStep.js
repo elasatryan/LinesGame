@@ -1,9 +1,10 @@
 (function () {
     'use strict';
-    function GameStep(addend, subtrahend) {
+    function GameStep(addend, subtrahend, score) {
         var that = this;
         that.addend = addend || [];
         that.subtrahend = subtrahend || [];
+        that.score = +score || 0;
     }
 
     $.extend(GameStep.prototype, {
