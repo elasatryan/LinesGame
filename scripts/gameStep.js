@@ -16,13 +16,9 @@
             that.subtrahend.push.apply(that.subtrahend, arguments);
         },
         reverse: function () {
-            var that = this,
-                queue;
+            var that = this;
 
-            queue = that.addend;
-            that.addend = that.subtrahend;
-            that.subtrahend = queue;
-            return that;
+            return new GameStep(that.subtrahend, that.addend);
         }
     });
     window.GameStep = GameStep;

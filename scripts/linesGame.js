@@ -22,25 +22,27 @@
                 return;
             }
 
-            var step = new GameStep();
-
-            that.dashboard.setValue(endPoint, that.dashboard.getValue(startPoint));
+            var step = new GameStep(),
+                color = that.dashboard.getValue(startPoint);
+            that.dashboard.setValue(endPoint, color);
             that.dashboard.setValue(startPoint, undefined);
             that.freeCells.replace(endPoint, startPoint);
 
-            step.addToSubtrahend(startPoint);
+            step.addToSubtrahend(new Ball(startPoint, color));
 
             var itemsToRemove = that.dashboard.remove(endPoint, that.options.removingCount);
-            step.addToSubtrahend.apply(step, itemsToRemove);
+            step.addToSubtrahend.apply(step, pointsToBalls(itemsToRemove, color));
 
             if (!itemsToRemove) {
-                step.addToAddend(endPoint);
+                step.addToAddend(new Ball(endPoint, color));
             }
+
             that.freeCells.add.apply(that.freeCells, itemsToRemove);
 
             addNewBalls(that, step);
 
             that.history.addStep(step);
+
         },
         gameOver: function () {
             var that = this;
@@ -48,7 +50,6 @@
         }
     });
 
-    //this function returns random colors queue
     function getRandomColors(count, repeat) {
         var queue = [];
         while (queue.length < count) {
@@ -91,15 +92,21 @@
             newBalls = linesGame.freeCells.getRandomPoints(count),
             colors = getRandomColors(count, linesGame.options.repeat);
         newBalls.forEach(function (item, index) {
-            linesGame.dashboard.setValue(item, colors[index]);
+            var color = colors[index];
+            linesGame.dashboard.setValue(item, color);
             var itemsToRemove = linesGame.dashboard.remove(item, linesGame.options.removingCount);
             linesGame.freeCells.add.apply(linesGame.freeCells, itemsToRemove);
-            step.addToSubtrahend.apply(step, itemsToRemove);
-
+            step.addToSubtrahend.apply(step, pointsToBalls(itemsToRemove, color));
             if (!itemsToRemove) {
-                step.addToAddend(item);
+                step.addToAddend(new Ball(item, color));
             }
         });
+    }
+
+    function pointsToBalls(pointArray, color) {
+        return pointArray && pointArray.map(function (item) {
+                return new Ball(item, color);
+            });
     }
 
     window.LinesGame = LinesGame;

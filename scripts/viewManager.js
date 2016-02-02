@@ -28,6 +28,7 @@ $(function () {
                 return;
             }
             linesGame.moveBall(selectedElement.data('point'), element.data('point'));
+            selectedElement.removeClass('selected');
             selectedElement = null;
 
             drawStep(linesGame.history.getLastStep());
@@ -48,15 +49,13 @@ $(function () {
     });
 
     $('.undo').click(function () {
-        linesGame.history.undo();
-        var step = linesGame.history.undone[linesGame.history.undone.length - 1];
-        drawStep(step.reverse());
+        var step = linesGame.history.getLastStep();
+        linesGame.history.undo() && drawStep(step.reverse());
     });
     $('.redo').click(function () {
         linesGame.history.redo();
         var step = linesGame.history.getLastStep();
-        console.log(step.reverse());
-        drawStep(step.reverse());
+        drawStep(step);
     });
 
     function drawBoard(size) {
@@ -75,12 +74,11 @@ $(function () {
 
     function drawStep(step) {
         step.addend.forEach(function (item) {
-            var color = linesGame.dashboard.getValue(item);
-            $(getPointSelector(item)).addClass(colors[color - 1]);
+            $(getPointSelector(item.point)).addClass(colors[item.color - 1]);
         });
 
         step.subtrahend.forEach(function (item) {
-            $(getPointSelector(item)).removeAttr('class');
+            $(getPointSelector(item.point)).removeAttr('class');
         });
     }
 

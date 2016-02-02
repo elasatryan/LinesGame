@@ -12,8 +12,9 @@
             if (1 === that.length) {
                 return;
             }
-            var item = that.pop();
-            item && that.undone.push(item);
+            that.undone.push(that.pop());
+
+            return that;
         },
         redo: function () {
             var that = this,
