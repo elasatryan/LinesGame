@@ -16,7 +16,6 @@ $(function () {
             if (element.hasClass('selected')) {
                 return;
             }
-            // todo: GAMEOVER case;
 
             element.addClass('selected');
             selectedElement && selectedElement.removeClass('selected');
@@ -31,6 +30,9 @@ $(function () {
             selectedElement = null;
 
             drawStep(linesGame.history.getLastStep(), linesGame.getScore());
+            if (linesGame.gameOver()) {
+                $('<h2>').appendTo($('.game')).text('GAME OVER');
+            }
         });
 
     $('#newGame').click(function () {

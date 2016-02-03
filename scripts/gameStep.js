@@ -18,7 +18,6 @@
         },
         reverse: function () {
             var that = this;
-
             return new GameStep(that.subtrahend, that.addend);
         }
     });

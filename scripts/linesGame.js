@@ -5,10 +5,12 @@
     function LinesGame(options) {
         var that = this;
         that.options = verifyOptions(options);
+
         var size = that.options.size;
         that.dashboard = new Matrix(size);
         that.freeCells = getInitialPool(size);
         that.history = new GameHistory();
+
         var step = new GameStep();
         addNewBalls(that, step);
         that.history.addStep(step);
@@ -43,6 +45,7 @@
 
             that.history.addStep(step);
             modifyMatrixByStep(that.dashboard, step);
+            modifyPoolByStep(that.freeCells, step);
             step.score = previousScore + getScoreByStep(step);
         },
         gameOver: function () {
@@ -130,6 +133,18 @@
         step.subtrahend.forEach(function (item) {
             matrix.setValue(item.point, undefined);
         });
+    }
+
+    function modifyPoolByStep(pool, step) {
+        //TODO
+        //I will check if item pool also have point don't do something with it;
+        step.addend.forEach(function (item) {
+            pool.remove(item.point);
+        });
+        step.subtrahend.forEach((function (item) {
+            pool.add(item.point);
+        }))
+        //this function is working wrong
     }
 
     function getScoreByStep(step) {
