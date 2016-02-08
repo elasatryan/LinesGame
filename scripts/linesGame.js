@@ -7,46 +7,31 @@
         that.options = verifyOptions(options);
 
         var size = that.options.size;
+
         that.dashboard = new Matrix(size);
         that.freeCells = getInitialPool(size);
         that.history = new GameHistory();
 
-        var step = new GameStep();
-        addNewBalls(that, step);
-        that.history.addStep(step);
+        addNewBalls(that, that.history.addStep(new GameStep()).getLastStep());
     }
 
     $.extend(LinesGame.prototype, {
         moveBall: function (startPoint, endPoint) {
-            var that = this;
-            if (!that.dashboard.hasPath(startPoint, endPoint)) {
+            var that = this,
+                dashboard = that.dashboard;
+
+            if (!dashboard.hasPath(startPoint, endPoint)) {
                 return;
             }
+
             var previousScore = that.getScore(),
-                step = new GameStep(),
-                color = that.dashboard.getValue(startPoint);
+                color = dashboard.getValue(startPoint);
 
-            that.dashboard.setValue(endPoint, color);
-            that.dashboard.setValue(startPoint, undefined);
-            that.freeCells.replace(endPoint, startPoint);
+            that.history.addStep(new GameStep(previousScore));
 
-            step.addToSubtrahend(new Ball(startPoint, color));
-
-            var itemsToRemove = that.dashboard.remove(endPoint, that.options.removingCount);
-            step.addToSubtrahend.apply(step, pointsToBalls(itemsToRemove, color));
-
-            if (!itemsToRemove) {
-                step.addToAddend(new Ball(endPoint, color));
-            }
-
-            that.freeCells.add.apply(that.freeCells, itemsToRemove);
-
-            addNewBalls(that, step);
-
-            that.history.addStep(step);
-            modifyMatrixByStep(that.dashboard, step);
-            modifyPoolByStep(that.freeCells, step);
-            step.score = previousScore + getScoreByStep(step);
+            removeBallFromGame(that, new Ball(startPoint, color));
+            addBallToGame(that, new Ball(endPoint, color));
+            addNewBalls(that);
         },
         gameOver: function () {
             var that = this;
@@ -59,11 +44,12 @@
         undo: function () {
             var that = this,
                 step = that.history.getLastStep();
-            return that.history.undo() && step.reverse();
+
+            return that.history.undo() && modifyGameByStep(that, step.reverse());
         },
         redo: function () {
             var that = this;
-            return that.history.redo() && that.history.getLastStep();
+            return that.history.redo() && modifyGameByStep(that,  that.history.getLastStep());
         }
     });
 
@@ -104,20 +90,51 @@
         return pool;
     }
 
-    function addNewBalls(linesGame, step) {
-        var count = linesGame.options.ballsCount,
-            newBalls = linesGame.freeCells.getRandomPoints(count),
-            colors = getRandomColors(count, linesGame.options.repeat);
+    function addNewBalls(linesGame) {
+        var options = linesGame.options,
+            newBalls = linesGame.freeCells.getRandomPoints(options.ballsCount),
+            colors = getRandomColors(newBalls.length, options.repeat);
+
         newBalls.forEach(function (item, index) {
-            var color = colors[index];
-            linesGame.dashboard.setValue(item, color);
-            var itemsToRemove = linesGame.dashboard.remove(item, linesGame.options.removingCount);
-            linesGame.freeCells.add.apply(linesGame.freeCells, itemsToRemove);
-            step.addToSubtrahend.apply(step, pointsToBalls(itemsToRemove, color));
-            if (!itemsToRemove) {
-                step.addToAddend(new Ball(item, color));
-            }
+            addBallToGame(linesGame, new Ball(item, colors[index]));
         });
+    }
+
+    function addBallToGame(linesGame, ball) {
+        var dashboard = linesGame.dashboard,
+            freeCells = linesGame.freeCells,
+            step = linesGame.history.getLastStep(),
+            point = ball.point,
+            color = ball.color,
+            removingCount = linesGame.options.removingCount;
+
+        freeCells.remove(point);
+        dashboard.setValue(point, color);
+
+        var removeCandidates = pointsToBalls(dashboard.removeCandidates(point, removingCount), color);
+
+        if (removeCandidates) {
+            removeBallFromGame(linesGame, ball, false);
+            removeCandidates.forEach(function (item) {
+                removeBallFromGame(linesGame, item);
+            });
+
+            step.score += removeCandidates.length + 1;
+        } else {
+            step.addToAddend(ball);
+        }
+
+        return !!removeCandidates;
+    }
+
+    function removeBallFromGame(linesGame, ball, addToStep) {
+        var point = ball.point,
+            step = linesGame.history.getLastStep();
+
+        linesGame.dashboard.setValue(point, undefined);
+        linesGame.freeCells.add(point);
+
+        (false !== addToStep) && step.addToSubtrahend(ball);
     }
 
     function pointsToBalls(pointArray, color) {
@@ -126,29 +143,20 @@
             });
     }
 
-    function modifyMatrixByStep(matrix, step) {
+    function modifyGameByStep(linesGame, step) {
+        var dashboard = linesGame.dashboard,
+            freeCells = linesGame.freeCells;
+
         step.addend.forEach(function (item) {
-            matrix.setValue(item.point, item.color);
+            dashboard.setValue(item.point,  item.color);
+            freeCells.remove(item.point);
         });
         step.subtrahend.forEach(function (item) {
-            matrix.setValue(item.point, undefined);
+            dashboard.setValue(item.point, undefined);
+            freeCells.add(item.point);
         });
-    }
 
-    function modifyPoolByStep(pool, step) {
-        //TODO
-        //I will check if item pool also have point don't do something with it;
-        step.addend.forEach(function (item) {
-            pool.remove(item.point);
-        });
-        step.subtrahend.forEach((function (item) {
-            pool.add(item.point);
-        }))
-        //this function is working wrong
-    }
-
-    function getScoreByStep(step) {
-        return step.subtrahend.length > 1 ? step.subtrahend.length : 0;
+        return step;
     }
 
     window.LinesGame = LinesGame;

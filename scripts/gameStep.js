@@ -1,25 +1,71 @@
 (function () {
     'use strict';
-    function GameStep(addend, subtrahend, score) {
+
+    var staticForEach = Array.prototype.forEach.call;
+
+    function GameStep(score, addend, subtrahend) {
         var that = this;
+
+        that.score = +score || 0;
         that.addend = addend || [];
         that.subtrahend = subtrahend || [];
-        that.score = +score || 0;
     }
 
     $.extend(GameStep.prototype, {
         addToAddend: function (item) {
             var that = this;
-            that.addend.push.apply(that.addend, arguments);
+
+            if(1 === arguments.length) {
+                removeRepeatedBall(that.subtrahend, item);
+                that.addend.push(item);
+
+                return that;
+            }
+
+            staticForEach(arguments, function(item) {
+                that.addToAddend(item);
+            });
+
+            return that;
         },
         addToSubtrahend: function (item) {
             var that = this;
-            that.subtrahend.push.apply(that.subtrahend, arguments);
+
+            if(1 === arguments.length) {
+                removeRepeatedBall(that.addend, item);
+                that.subtrahend.push(item);
+
+                return that;
+            }
+
+            staticForEach(arguments, function(item) {
+                that.addToSubtrahend(item);
+            });
+
+            return that;
         },
         reverse: function () {
             var that = this;
-            return new GameStep(that.subtrahend, that.addend);
+
+            if(that._reverse) {
+                return that._reverse;
+            }
+
+            that._reverse = new GameStep(that.score, that.subtrahend, that.addend);
+            that._reverse._reverse = that;
+
+            return that._reverse;
         }
     });
+
     window.GameStep = GameStep;
+
+    function removeRepeatedBall(collection, ball) {
+        return collection.some(function(item, index) {
+            if(ball.point.equals(item.point)) {
+                collection.splice(index, 1);
+                return true;
+            }
+        });
+    }
 })();

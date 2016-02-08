@@ -2,15 +2,6 @@ function Pool() {
 }
 Pool.prototype = [];
 $.extend(Pool.prototype, {
-    replace: function (replacePoint, replaceWith) {
-        var that = this;
-        that.some(function (item, index) {
-            if (item.equals(replacePoint)) {
-                that.splice(index, 1, replaceWith);
-                return true;
-            }
-        });
-    },
     add: function (point) {
         var that = this;
         that.push.apply(that, arguments);

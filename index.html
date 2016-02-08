@@ -11,38 +11,12 @@
     <script src="scripts/gameStep.js"></script>
     <script src="scripts/gameHistory.js"></script>
     <script src="scripts/linesGame.js"></script>
+    <script src="scripts/linesGameUi.js"></script>
     <script src="scripts/viewManager.js"></script>
     <link rel="stylesheet" type="text/css" href="content/style/lines.css"/>
 </head>
 <body>
-<div class="game">
-    <div class="settings">
-        <label>
-            <strong>Dashboard size:</strong>
-            <input type="number" id="size" min="5" max="10" value="9"/>
-        </label>
-        <label>
-            <strong>Balls count:</strong>
-            <input type="number" id="ballsCount" min="3" max="7" value="3"/>
-        </label>
-        <label>
-            <strong>Allow repeating:</strong>
-            <input type="checkbox" id="repeat" checked="checked"/>
-        </label>
-        <label>
-            <strong>Removing count:</strong>
-            <input type="number" id="removingCount" min="3" max="5" value="3"/>
-        </label>
-        <input type="button" id="newGame" value="NEW GAME"/>
-    </div>
-    <div class="gameBoard">
-        <div class="settingsBar"></div>
-        <h2 class="score">0</h2>
-        <table class="dashboard"></table>
-        <div class="undo"></div>
-        <div class="redo"></div>
-    </div>
-</div>
-<div class="generateGame">+</div>
+    <div class="games_feed"></div>
+    <div class="generate_game">+</div>
 </body>
 </html>
