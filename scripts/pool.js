@@ -13,13 +13,21 @@ $.extend(Pool.prototype, {
     },
     add: function (point) {
         var that = this;
-        that.push.apply(that, arguments);
+        if (!point) {
+            return
+        }
+        if (!that.some(function (item) {
+                return point.equals(item);
+            })) {
+            that.push(point);
+        }
     },
     remove: function (point) {
         var that = this;
         that.some(function (item, index) {
             if (item.equals(point)) {
                 that.takePoint(index);
+                return true;
             }
         });
     },

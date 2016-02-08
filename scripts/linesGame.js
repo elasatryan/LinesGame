@@ -45,7 +45,6 @@
 
             that.history.addStep(step);
             modifyMatrixByStep(that.dashboard, step);
-            modifyPoolByStep(that.freeCells, step);
             step.score = previousScore + getScoreByStep(step);
         },
         gameOver: function () {
@@ -59,6 +58,7 @@
         undo: function () {
             var that = this,
                 step = that.history.getLastStep();
+            modifyPoolByStep(that.freeCells, step);
             return that.history.undo() && step.reverse();
         },
         redo: function () {
@@ -138,12 +138,14 @@
     function modifyPoolByStep(pool, step) {
         //TODO
         //I will check if item pool also have point don't do something with it;
+
+
         step.addend.forEach(function (item) {
             pool.remove(item.point);
         });
         step.subtrahend.forEach((function (item) {
             pool.add(item.point);
-        }))
+        }));
         //this function is working wrong
     }
 
