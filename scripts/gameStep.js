@@ -3,69 +3,30 @@
 
     var staticForEach = Array.prototype.forEach.call;
 
-    function GameStep(score, addend, subtrahend) {
+    function GameStep(action, ball) {
         var that = this;
 
-        that.score = +score || 0;
-        that.addend = addend || [];
-        that.subtrahend = subtrahend || [];
+        that.action = action;
+        that.balls = Array.isArray(ball) ? ball : [ball];
     }
 
     $.extend(GameStep.prototype, {
-        addToAddend: function (item) {
-            var that = this;
+        addBall: function (ball) {
+            var that = this,
+                balls = that.balls;
 
-            if(1 === arguments.length) {
-                removeRepeatedBall(that.subtrahend, item);
-                that.addend.push(item);
-
-                return that;
-            }
-
-            staticForEach(arguments, function(item) {
-                that.addToAddend(item);
-            });
+            balls.push.apply(balls, arguments);
 
             return that;
         },
-        addToSubtrahend: function (item) {
+        changeAction: function (action) {
             var that = this;
 
-            if(1 === arguments.length) {
-                removeRepeatedBall(that.addend, item);
-                that.subtrahend.push(item);
-
-                return that;
-            }
-
-            staticForEach(arguments, function(item) {
-                that.addToSubtrahend(item);
-            });
+            that.action = action;
 
             return that;
-        },
-        reverse: function () {
-            var that = this;
-
-            if(that._reverse) {
-                return that._reverse;
-            }
-
-            that._reverse = new GameStep(that.score, that.subtrahend, that.addend);
-            that._reverse._reverse = that;
-
-            return that._reverse;
         }
     });
 
     window.GameStep = GameStep;
-
-    function removeRepeatedBall(collection, ball) {
-        return collection.some(function(item, index) {
-            if(ball.point.equals(item.point)) {
-                collection.splice(index, 1);
-                return true;
-            }
-        });
-    }
 })();

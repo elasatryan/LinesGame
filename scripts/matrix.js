@@ -1,10 +1,47 @@
 (function () {
     'use strict';
+    var linesToCheck = [
+        // horizontal
+        {
+            next: function(point){
+                return point.right();
+            },
+            prev: function(point) {
+                return point.left();
+            }
+        },
+        // vertical
+        {
+            next: function(point){
+                return point.bottom();
+            },
+            prev: function(point) {
+                return point.top();
+            }
+        },
+        // mainDiagonal
+        {
+            next: function(point) {
+                return point.bottomRight();
+            },
+            prev: function(point) {
+                return point.topLeft();
+            }
+        },
+        // secondaryDiagonal
+        {
+            next: function(point) {
+                return point.topRight();
+            },
+            prev: function(point) {
+                return point.bottomLeft();
+            }
+        }
+    ];
+
     function Matrix(size) {
         var that = this;
 
-        // why not works
-        Array.call(that, size);
         that.size = size;
 
         for (var i = 0; i < size; i++) {
@@ -22,46 +59,31 @@
             while (queue.length) {
                 current = queue.shift();
 
-                var left = current.left(),
-                    right = current.right(),
-                    top = current.top(),
-                    bottom = current.bottom();
+                var some = [current.top(), current.right(), current.left(), current.bottom()].some(function (point) {
+                    if (point.equals(endPoint)) {
+                        return true;
+                    }
 
-                if ([left, right, top, bottom].some(
-                        function (item) {
-                            return item.equals(endPoint);
-                        })) {
+                    if (clone.hasPoint(point) && !clone.getValue(point)) {
+                        queue.push(point);
+                        clone.setValue(point, -1);
+                    }
+                });
+
+                if (some) {
                     return true;
-                }
-                if (clone.hasPoint(left) && !clone.getValue(left)) {
-                    queue.push(left);
-                    clone.setValue(left, -1);
-                }
-                if (clone.hasPoint(right) && !clone.getValue(right)) {
-                    queue.push(right);
-                    clone.setValue(right, -1);
-                }
-                if (clone.hasPoint(top) && !clone.getValue(top)) {
-                    queue.push(top);
-                    clone.setValue(top, -1);
-                }
-                if (clone.hasPoint(bottom) && !clone.getValue(bottom)) {
-                    queue.push(bottom);
-                    clone.setValue(bottom, -1);
                 }
             }
             return false;
         },
         clone: function () {
-            var that = this,
-                size = that.size;
+            var that = this;
 
-            var clone = new Matrix(size);
-            for (var i = 0; i < size; i++) {
-                for (var j = 0; j < size; j++) {
-                    clone[i][j] = that[i][j];
-                }
-            }
+            // todo change to don't clear `clone`
+            var clone = new Matrix(that.size);
+            clone.length = 0;
+            clone.push.apply(clone,  JSON.clone(that));
+
             return clone;
         },
         getValue: function (point) {
@@ -83,10 +105,9 @@
         removeCandidates: function (point, removeCount) {
             var that = this,
                 queue = [];
-            queue.push.apply(queue, horizontalRemoveCandidates(that, point, removeCount));
-            queue.push.apply(queue, verticalRemoveCandidates(that, point, removeCount));
-            queue.push.apply(queue, mainDiagonalRemoveCandidates(that, point, removeCount));
-            queue.push.apply(queue, secondaryDiagonalRemoveCandidates(that, point, removeCount));
+            linesToCheck.forEach(function(line) {
+                queue.push.apply(queue, removeCandidates(that, point, removeCount, line.next, line.prev));
+            });
 
             return queue.length ? queue : null;
         }
@@ -94,70 +115,20 @@
 
     window.Matrix = Matrix;
 
-    function horizontalRemoveCandidates(matrix, point, removeCount) {
+    function removeCandidates(matrix, point, removeCount, getNext, getPrev) {
         var val = matrix.getValue(point),
-            leftPoint = point.left(),
-            rightPoint = point.right(),
+            prev = getPrev(point),
+            next = getNext(point),
             queue = [];
 
-        while (matrix.hasPoint(leftPoint) && matrix.getValue(leftPoint) === val) {
-            queue.unshift(leftPoint);
-            leftPoint = leftPoint.left();
+        // todo: make it to be more effective
+        while (matrix.hasPoint(prev) && matrix.getValue(prev) === val) {
+            queue.unshift(prev);
+            prev = getPrev(prev);
         }
-        while (matrix.hasPoint(rightPoint) && matrix.getValue(rightPoint) === val) {
-            queue.push(rightPoint);
-            rightPoint = rightPoint.right();
-        }
-        return queue.length + 1 >= removeCount ? queue : null;
-    }
-
-    function verticalRemoveCandidates(matrix, point, removeCount) {
-        var val = matrix.getValue(point),
-            topPoint = point.top(),
-            bottomPoint = point.bottom(),
-            queue = [];
-
-        while (matrix.hasPoint(topPoint) && matrix.getValue(topPoint) === val) {
-            queue.unshift(topPoint);
-            topPoint = topPoint.top();
-        }
-        while (matrix.hasPoint(bottomPoint) && matrix.getValue(bottomPoint) === val) {
-            queue.push(bottomPoint);
-            bottomPoint = bottomPoint.bottom();
-        }
-        return queue.length + 1 >= removeCount ? queue : null;
-    }
-
-    function mainDiagonalRemoveCandidates(matrix, point, removeCount) {
-        var val = matrix.getValue(point),
-            topLeftPoint = point.topLeft(),
-            bottomRightPoint = point.bottomRight(),
-            queue = [];
-
-        while (matrix.hasPoint(topLeftPoint) && matrix.getValue(topLeftPoint) === val) {
-            queue.unshift(topLeftPoint);
-            topLeftPoint = topLeftPoint.topLeft();
-        }
-        while (matrix.hasPoint(bottomRightPoint) && matrix.getValue(bottomRightPoint) === val) {
-            queue.push(bottomRightPoint);
-            bottomRightPoint = bottomRightPoint.bottomRight();
-        }
-        return queue.length + 1 >= removeCount ? queue : null;
-    }
-
-    function secondaryDiagonalRemoveCandidates(matrix, point, removeCount) {
-        var val = matrix.getValue(point),
-            topRightPoint = point.topRight(),
-            bottomLeftPoint = point.bottomLeft(),
-            queue = [];
-
-        while (matrix.hasPoint(topRightPoint) && matrix.getValue(topRightPoint) === val) {
-            queue.unshift(topRightPoint);
-            topRightPoint = topRightPoint.topRight();
-        }
-        while (matrix.hasPoint(bottomLeftPoint) && matrix.getValue(bottomLeftPoint) === val) {
-            queue.push(bottomLeftPoint);
-            bottomLeftPoint = bottomLeftPoint.bottomLeft();
+        while (matrix.hasPoint(next) && matrix.getValue(next) === val) {
+            queue.push(next);
+            next = getNext(next);
         }
         return queue.length + 1 >= removeCount ? queue : null;
     }

@@ -11,3 +11,13 @@ $.extend(JSON, {
         return JSON.parse(JSON.stringify(json));
     }
 });
+
+var proto = Array.prototype;
+$.extend(Array, {
+    reverse: function(arr) {
+        return proto.reverse.call(arr);
+    },
+    clone: function(arr) {
+        return proto.slice(arr);
+    }
+});

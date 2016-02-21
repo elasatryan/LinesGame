@@ -43,16 +43,7 @@
         equals: function (p) {
             var that = this;
 
-            if (arguments.length <= 1) {
-                return that.row === p.row && that.column === p.column;
-            }
-
-            for (var i = 0; i < arguments.length; i++) {
-                if (!that.equals(arguments[i])) {
-                    return false;
-                }
-            }
-            return true;
+            return that.row === p.row && that.column === p.column;
         }
     });
 

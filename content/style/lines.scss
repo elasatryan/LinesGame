@@ -1,173 +1,179 @@
-//colors
-$jacarta: #413663;
-$white: #fff;
-$anakiwa: #9fddff;
-$silver_22: rgba(191, 191, 191, 0.22);
-$black_16: rgba(0, 0, 0, 0.16);
-$black_23: rgba(0, 0, 0, 0.23);
-$persian_red: #d32f2f;
-$tory_blue: #0d47a1;
-$goblin: #388e3c;
-$fuchsia_pink: #ab47bc;
-$violet_red: #ec407a;
-$cerulean: #03a9f4;
-$yellow: #ffff00;
-$turquoise: #3cd6d6;
+@import "common";
 
-//urls
-$img_menu: url(../images/menu.png);
-$img_back: url(../images/back.png);
-$img_redo: url(../images/redo.png);
-$img_undo: url(../images/undo.png);
+.games-feed {
+    text-align: center;
+    white-space: nowrap;
 
-@import url(https://fonts.googleapis.com/css?family=Roboto);
-
-body {
-    font-family: roboto, sans-serif;
-    background-color: $jacarta;
-    color: $white;
+    > :not(:first-child) {
+        margin-left: 10px;
+    }
 }
 
-button {
-    height: 50px;
-    width: 200px;
-}
+.game {
+    $header: 40px;
 
-input {
-    width: 42px;
-}
-
-.lines_game {
+    background: #28009a;
     display: inline-block;
+    overflow: hidden;
+    position: relative;
+    text-align: left;
+    @include userSelect(none);
 
-    .game_area {
-        display: inline-block;
+    > header {
+        box-shadow: 0 1px 16px 0 black;
+        height: $header;
+        overflow: hidden;
+        padding: 0 10px;
         position: relative;
+
+        > * {
+            vertical-align: middle;
+        }
     }
 
-    .settings_container {
-        display: none;
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
+    .controls {
+        display: inline-block;
+        float: right;
+        height: $header;
+        line-height: $header;
+
+        > * {
+            vertical-align: middle;
+        }
     }
+
+    .score {
+        display: inline-block;
+        margin: 0;
+        min-width: 60px;
+        text-align: center;
+    }
+
     .settings {
-        width: 200px;
+        background: $settings_bg;
+        bottom: 0;
+        box-shadow: 0 0 10px;
+        color: black;
         height: 200px;
-        background-color: $anakiwa;
+        left: 0;
+        margin: auto;
+        padding: 10px;
+        position: absolute;
+        right: 0;
+        top: 0;
+        width: 240px;
     }
 
-    table {
+    .settings-container {
+        background: $overlay_bg;
+        display: none;
+        height: calc(100% - #{$header});
+        left: 0;
+        position: absolute;
+        top: $header;
+        width: 100%;
+
+        &::before {
+            color: black;
+            content: 'Game Over';
+            display: none;
+            font-size: 24px;
+            font-weight: bold;
+            left: 0;
+            right: 0;
+            text-align: center;
+            text-transform: uppercase;
+        }
+    }
+
+    &.open {
+        .icon.menu {
+            background-position: -42px -2px;
+        }
+
+        .settings-container {
+            display: block;
+        }
+    }
+
+    &.game-over {
+        .settings-container {
+            display: block;
+
+            &::before {
+                display: block;
+            }
+        }
+    }
+}
+
+.lines-game {
+    .dashboard {
         border-collapse: collapse;
-        background: $silver_22;
-    }
-
-    strong {
-        text-align: left;
-    }
-
-    label {
-        line-height: 2;
-        text-align: right;
+        background: white;
     }
 
     td {
         height: 50px;
         width: 50px;
-        border: 3px solid $jacarta;
+        border: 1px solid black;
+    }
 
-        &[class]::after {
-            content: '';
-            height: 45px;
-            width: 45px;
-            margin: auto;
-            display: block;
+    .ball {
+        $colors: (
+            red: $persian_red,
+            blue: $tory_blue,
+            green: $goblin,
+            purple: $fuchsia_pink,
+            pink: $violet_red,
+            cyan: $cerulean,
+            yellow: #ffb200
+        );
+
+        &::after {
             border-radius: 100%;
-            box-shadow: 0 3px 6px $black_16, 0 3px 6px $black_23;
-        }
-    }
-
-    .red::after {
-        background: $persian_red;
-    }
-
-    .blue::after {
-        background: $tory_blue;
-    }
-
-    .green::after {
-        background: $goblin;
-    }
-
-    .purple::after {
-        background: $fuchsia_pink;
-    }
-
-    .pink::after {
-        background: $violet_red;
-    }
-
-    .cyan::after {
-        background: $cerulean;
-    }
-
-    .yellow::after {
-        background: $yellow;
-    }
-
-    .selected {
-        opacity: .5;
-    }
-
-    &.open_settings {
-        .menu_button {
-            background: $img_back 0 0 / cover;
-        }
-
-        .settings {
+            box-shadow: 0 3px 10px -3px black;
+            content: '';
             display: block;
+            height: 45px;
+            margin: auto;
+            width: 45px;
+        }
+
+        @each $color, $value in $colors {
+            &.#{$color} {
+                &::after {
+                    background: $value;
+                }
+            }
+        }
+
+        &.selected {
+            &::after {
+                animation: bitrate .3s infinite ease;
+                box-shadow: 0 3px 8px -1px black;
+            }
         }
     }
-
-    &.game_over {
-
-    }
 }
 
-.menu_button {
-    background: $img_menu 0 0 / cover;
-    height: 36px;
-    width: 36px;
-}
-
-.generate_game {
-    background: $turquoise;
+// todo inheritance
+.generate-game {
     border-radius: 100%;
     height: 60px;
     width: 60px;
-    display: block;
     font-size: 36px;
     line-height: 60px;
     text-align: center;
     position: absolute;
     right: 20px;
     bottom: 20px;
-    cursor: pointer;
-    box-shadow: 0 3px 6px $black_16, 0 3px 6px $black_23;
+    box-shadow: 0 3px 6px $black_16;
+
+    @include userSelect(none);
 }
 
-.redo {
-    background: $img_redo 0 0 / cover;
-    height: 36px;
-    width: 36px;
-    display: inline-block;
-}
-
-.undo {
-    background: $img_undo 0 0 / cover;
-    height: 36px;
-    width: 36px;
-    display: inline-block;
+@keyframes bitrate {
+    from { transform: scale(1); }
+    to { transform: scale(1.05); }
 }

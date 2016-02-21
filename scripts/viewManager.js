@@ -3,11 +3,11 @@
  */
 
 $(function () {
-    var gamesFeed = $('.games_feed');
+    var gamesFeed = $('.games-feed');
 
-    $('.generate_game').one('click', function () {
+    $('.generate-game').on('click', function () {
         $.ajax({
-            url: 'templates/lines_game.html'
+            url: 'templates/linesGame.html'
         }).success(function (template) {
             $(template).appendTo(gamesFeed).linesGame();
         });

@@ -1,0 +1,33 @@
+
+<div class="game lines-game">
+    <header>
+        <div class="icon menu"></div>
+        <div class="controls">
+            <div class="icon undo"></div>
+            <h2 class="score">0</h2>
+            <div class="icon redo"></div>
+        </div>
+    </header>
+    <div class="settings-container">
+        <div class="settings">
+            <label>
+                <strong>Dashboard size:</strong>
+                <input type="number" class="size" min="5" max="10" value="9"/>
+            </label>
+            <label>
+                <strong>Balls count:</strong>
+                <input type="number" class="balls-count" min="3" max="7" value="3"/>
+            </label>
+            <label>
+                <strong>Allow repeating:</strong>
+                <input type="checkbox" class="repeat" checked="checked"/>
+            </label>
+            <label>
+                <strong>Removing count:</strong>
+                <input type="number" class="removing-count" min="3" max="5" value="3"/>
+            </label>
+            <button class="new-game">New Game</button>
+        </div>
+    </div>
+    <table class="dashboard"></table>
+</div>

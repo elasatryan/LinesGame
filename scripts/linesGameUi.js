@@ -1,9 +1,14 @@
 (function () {
     'use strict';
     var colors = ['red', 'blue', 'green', 'yellow', 'pink', 'cyan', 'purple'],
-        ballsSelector = colors.map(function (color) {
-            return 'td.' + color;
-        }).join();
+        gameActions = {
+            add: function(element, colorName) {
+                element.addClass(colorName);
+            },
+            remove: function(element) {
+                element.removeAttr('class');
+            }
+        };
 
     $.extend($.fn, {
         linesGame: function () {
@@ -11,11 +16,11 @@
             var linesGame,
                 selectedElement,
                 size = that.find('.size'),
-                ballsCount = that.find('.balls_count'),
+                ballsCount = that.find('.balls-count'),
                 repeat = that.find('.repeat'),
-                removingCount = that.find('.removing_count'),
+                removingCount = that.find('.removing-count'),
                 score = that.find('.score'),
-                board = that.find('.dashboard').on('click', ballsSelector, function () {
+                board = that.find('.dashboard').on('click', '.ball', function () {
                     var element = $(this);
 
                     if (element.hasClass('selected')) {
@@ -25,7 +30,7 @@
                     element.addClass('selected');
                     selectedElement && selectedElement.removeClass('selected');
                     selectedElement = element;
-                }).on('click', 'td:not([class])', function () {
+                }).on('click', 'td:not(.ball)', function () {
                     var element = $(this);
 
                     if (!selectedElement) {
@@ -36,34 +41,30 @@
                     selectedElement.removeClass('selected');
                     selectedElement = null;
 
-                    drawStep(board, linesGame.history.getLastStep());
+                    drawTrace(board, linesGame.history.getLastTrace());
                     score.text(linesGame.getScore());
 
                     if (linesGame.gameOver()) {
-                        that.addClass('game_over');
+                        that.addClass('game-over');
                     }
-
-                    checkGameFields(linesGame, board);
                 });
 
-            that.find('.new_game').click(function () {
-                initializeGame(board, size, ballsCount, repeat, removingCount);
+            that.find('.new-game').click(function () {
+                linesGame = initializeGame(board, size, ballsCount, repeat, removingCount);
 
-                that.removeClass('game_over open_settings');
+                that.removeClass('game-over open');
             });
-            that.find('.menu_button').click(function () {
-                that.toggleClass('open_settings');
+            that.find('.menu').click(function () {
+                that.toggleClass('open');
             });
 
             that.find('.undo').click(function () {
-                drawStep(board, linesGame.undo());
+                drawTrace(board, linesGame.undo());
                 score.text(linesGame.getScore());
-                checkGameFields(linesGame, board);
             });
             that.find('.redo').click(function () {
-                drawStep(board,  linesGame.redo());
+                drawTrace(board,  linesGame.redo());
                 score.text(linesGame.getScore());
-                checkGameFields(linesGame, board);
             });
 
             linesGame = initializeGame(board, size, ballsCount, repeat, removingCount);
@@ -72,8 +73,10 @@
 
     function drawBoard(board, size) {
         board.empty();
+
         for (var i = 0; i < size; i++) {
             var tr = $('<tr>');
+
             for (var j = 0; j < size; j++) {
                 $('<td>').appendTo(tr)
                     .data('point', new Point(i, j));
@@ -82,16 +85,19 @@
         }
     }
 
-    function drawStep(board, step) {
-        if (!step) {
+    function drawTrace(board, trace) {
+        if (!trace) {
             return;
         }
-        step.addend.forEach(function (item) {
-            board.find(getPointSelector(item.point)).addClass(colors[item.color - 1]);
-        });
 
-        step.subtrahend.forEach(function (item) {
-            board.find(getPointSelector(item.point)).removeAttr('class');
+        // todo optimize
+        trace.forEach(function (step) {
+            step.balls.forEach(function(ball) {
+                var colorName = colors[ball.color - 1],
+                    action = gameActions[step.action];
+
+                action(board.find(getPointSelector(ball.point)), 'ball ' + colorName);
+            });
         });
     }
 
@@ -106,7 +112,7 @@
         updateOptionsView(size, ballsCount, removingCount, options);
         drawBoard(board, options.size);
 
-        drawStep(board, linesGame.history.getLastStep());
+        drawTrace(board, linesGame.history.getLastTrace());
 
         return linesGame;
     }
@@ -124,16 +130,5 @@
         size.val(options.size);
         ballsCount.val(options.ballsCount);
         removingCount.val(options.removingCount);
-    }
-
-    function checkGameFields(game, el) {
-        game.dashboard.forEach(function(item, ind) {
-            item.forEach(function(val, i) {
-                var c = el.find(getPointSelector(new Point(ind, i))).attr('class');
-                var step = game.history.getLastStep();
-
-                val && !c && console.log(ind, i, colors[val - 1], c, JSON.clone(step));
-            });
-        });
     }
 })();
