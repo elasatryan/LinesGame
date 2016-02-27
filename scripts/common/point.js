@@ -40,17 +40,12 @@
             var that = this;
             return new Point(that.row + 1, that.column + 1);
         },
-        equals: function (p) {
+        equals: function () {
             var that = this;
-            if (arguments.length <= 1) {
-                return that.row === p.row && that.column === p.column;
-            }
-            for (var i = 0; i < arguments.length; i++) {
-                if (!that.equals(arguments[i])) {
-                    return false;
-                }
-            }
-            return true;
+
+            return Array.every(arguments, function (item) {
+                return that.row === item.row && that.column === item.column;
+            });
         }
     });
 

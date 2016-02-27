@@ -1,10 +1,10 @@
 (function () {
     'use strict';
 
-    function Ball(point, value) {
+    function Ball(point, color) {
         var that = this;
         that.point = point;
-        that.color = value;
+        that.color = color;
     }
 
     window.Ball = Ball;
