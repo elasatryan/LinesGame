@@ -40,12 +40,10 @@
             var that = this;
             return new Point(that.row + 1, that.column + 1);
         },
-        equals: function () {
+        equals: function (p) {
             var that = this;
 
-            return Array.every(arguments, function (item) {
-                return that.row === item.row && that.column === item.column;
-            });
+            return that.row === p.row && that.column === p.column;
         }
     });
 

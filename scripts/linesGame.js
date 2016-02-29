@@ -1,6 +1,14 @@
 (function () {
     'use strict';
     var maxColorsCount = 7;
+    var gameActions = {
+        add: 'add',
+        remove: 'remove'
+    };
+    var reverseMap = {
+        add: 'remove',
+        remove: 'add'
+    };
 
     function LinesGame(options) {
         var that = this;
@@ -9,11 +17,10 @@
         var size = that.options.size;
 
         that.dashboard = new Matrix(size);
-        console.log(that.dashboard);
         that.freeCells = getInitialPool(size);
         that.history = new GameHistory();
 
-        addNewBalls(that, that.history.addStep(new GameStep()).getLastStep());
+        addNewBalls(that, that.history.addTrace(new GameTrace()).getLastTrace());
     }
 
     $.extend(LinesGame.prototype, {
@@ -28,9 +35,9 @@
             var previousScore = that.getScore(),
                 color = dashboard.getValue(startPoint);
 
-            that.history.addStep(new GameStep(previousScore));
+            that.history.addTrace(new GameTrace(previousScore));
 
-            removeBallFromGame(that, new Ball(startPoint, color));
+            removeBallFromGame(that, new Ball(startPoint, color), true);
             addBallToGame(that, new Ball(endPoint, color));
             addNewBalls(that);
         },
@@ -44,13 +51,13 @@
         },
         undo: function () {
             var that = this,
-                step = that.history.getLastStep();
+                trace = that.history.getLastTrace();
 
-            return that.history.undo() && modifyGameByStep(that, step.reverse());
+            return that.history.undo() && modifyGameByTrace(that, trace.reverse(reverseMap));
         },
         redo: function () {
             var that = this;
-            return that.history.redo() && modifyGameByStep(that, that.history.getLastStep());
+            return that.history.redo() && modifyGameByTrace(that,  that.history.getLastTrace());
         }
     });
 
@@ -104,7 +111,7 @@
     function addBallToGame(linesGame, ball) {
         var dashboard = linesGame.dashboard,
             freeCells = linesGame.freeCells,
-            step = linesGame.history.getLastStep(),
+            trace = linesGame.history.getLastTrace(),
             point = ball.point,
             color = ball.color,
             removingCount = linesGame.options.removingCount;
@@ -115,27 +122,32 @@
         var removeCandidates = pointsToBalls(dashboard.removeCandidates(point, removingCount), color);
 
         if (removeCandidates) {
-            removeBallFromGame(linesGame, ball, false);
+            removeBallFromGame(linesGame, ball);
+
+            //removeCandidates.push(ball);
             removeCandidates.forEach(function (item) {
                 removeBallFromGame(linesGame, item);
             });
 
-            step.score += removeCandidates.length + 1;
+            trace.addStep(new GameStep(gameActions.remove, removeCandidates));
+
+            trace.score += removeCandidates.length + 1;
         } else {
-            step.addToAddend(ball);
+            trace.addStep(new GameStep(gameActions.add, ball));
         }
 
         return !!removeCandidates;
     }
 
-    function removeBallFromGame(linesGame, ball, addToStep) {
+    // the default value of addToTrace is false
+    function removeBallFromGame(linesGame, ball, addToTrace) {
         var point = ball.point,
-            step = linesGame.history.getLastStep();
+            trace = linesGame.history.getLastTrace();
 
         linesGame.dashboard.setValue(point, undefined);
         linesGame.freeCells.add(point);
 
-        (false !== addToStep) && step.addToSubtrahend(ball);
+        addToTrace && trace.addStep(new GameStep(gameActions.remove, ball));
     }
 
     function pointsToBalls(pointArray, color) {
@@ -144,20 +156,20 @@
             });
     }
 
-    function modifyGameByStep(linesGame, step) {
+    function modifyGameByTrace(linesGame, trace) {
         var dashboard = linesGame.dashboard,
             freeCells = linesGame.freeCells;
 
-        step.addend.forEach(function (item) {
-            dashboard.setValue(item.point, item.color);
-            freeCells.remove(item.point);
-        });
-        step.subtrahend.forEach(function (item) {
-            dashboard.setValue(item.point, undefined);
-            freeCells.add(item.point);
+        trace.forEach(function (step) {
+            var isAdd = step.action === gameActions.add;
+            step.balls.forEach(function(ball) {
+
+                dashboard.setValue(ball.point, isAdd ? ball.color : undefined);
+                isAdd ? freeCells.remove(ball.point) : freeCells.add(ball.point);
+            });
         });
 
-        return step;
+        return trace;
     }
 
     window.LinesGame = LinesGame;

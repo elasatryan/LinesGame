@@ -1,32 +1,33 @@
-<div class="game lines_game">
+
+<div class="game lines-game">
     <header>
-        <span class="icon menu_button"></span>
-        <span class="icon undo"></span>
-        <h2 class="score">0</h2>
-        <span class="icon redo"></span>
+        <div class="icon menu"></div>
+        <div class="controls">
+            <div class="icon undo"></div>
+            <h2 class="score">0</h2>
+            <div class="icon redo"></div>
+        </div>
     </header>
-    <div class="gameBoard">
-        <table class="dashboard"></table>
-        <div class="settings_container">
-            <div class="settings">
-                <label>
-                    <strong>Dashboard size:</strong>
-                    <input type="number" class="size" min="5" max="10" value="9"/>
-                </label>
-                <label>
-                    <strong>Balls count:</strong>
-                    <input type="number" class="balls_count" min="3" max="7" value="3"/>
-                </label>
-                <label>
-                    <strong>Allow repeating:</strong>
-                    <input type="checkbox" class="repeat" checked="checked"/>
-                </label>
-                <label>
-                    <strong>Removing count:</strong>
-                    <input type="number" class="removing_count" min="3" max="5" value="3"/>
-                </label>
-                <input type="button" class="new_game" value="NEW GAME"/>
-            </div>
+    <div class="settings-container">
+        <div class="settings">
+            <label>
+                <strong>Dashboard size:</strong>
+                <input type="number" class="size" min="5" max="10" value="9"/>
+            </label>
+            <label>
+                <strong>Balls count:</strong>
+                <input type="number" class="balls-count" min="3" max="7" value="3"/>
+            </label>
+            <label>
+                <strong>Allow repeating:</strong>
+                <input type="checkbox" class="repeat" checked="checked"/>
+            </label>
+            <label>
+                <strong>Removing count:</strong>
+                <input type="number" class="removing-count" min="3" max="5" value="3"/>
+            </label>
+            <button class="new-game">New Game</button>
         </div>
     </div>
+    <table class="dashboard"></table>
 </div>

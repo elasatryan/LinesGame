@@ -1,5 +1,44 @@
 (function () {
     'use strict';
+    var linesToCheck = [
+        // horizontal
+        {
+            next: function(point){
+                return point.right();
+            },
+            prev: function(point) {
+                return point.left();
+            }
+        },
+        // vertical
+        {
+            next: function(point){
+                return point.bottom();
+            },
+            prev: function(point) {
+                return point.top();
+            }
+        },
+        // mainDiagonal
+        {
+            next: function(point) {
+                return point.bottomRight();
+            },
+            prev: function(point) {
+                return point.topLeft();
+            }
+        },
+        // secondaryDiagonal
+        {
+            next: function(point) {
+                return point.topRight();
+            },
+            prev: function(point) {
+                return point.bottomLeft();
+            }
+        }
+    ];
+
     function Matrix(size) {
         var that = this;
 
@@ -20,17 +59,15 @@
             while (queue.length) {
                 current = queue.shift();
 
-                var left = current.left(),
-                    right = current.right(),
-                    top = current.top(),
-                    bottom = current.bottom();
-
-                var some = [left, right, top, bottom].some(function (item) {
-                    if (item.equals(endPoint)) {
+                var some = [current.top(), current.right(), current.left(), current.bottom()].some(function (point) {
+                    if (point.equals(endPoint)) {
                         return true;
                     }
 
-                    markIfFree(clone, item) && queue.push(item);
+                    if (clone.hasPoint(point) && !clone.getValue(point)) {
+                        queue.push(point);
+                        clone.setValue(point, -1);
+                    }
                 });
 
                 if (some) {
@@ -40,11 +77,12 @@
             return false;
         },
         clone: function () {
-            var that = this,
-                clone = new Matrix();
+            var that = this;
 
-            clone.push.apply(clone, JSON.clone(that));
-            clone.size = that.size;
+            // todo change to don't clear `clone`
+            var clone = new Matrix(that.size);
+            clone.length = 0;
+            clone.push.apply(clone,  JSON.clone(that));
 
             return clone;
         },
@@ -67,44 +105,31 @@
         removeCandidates: function (point, removeCount) {
             var that = this,
                 queue = [];
-            queue.push.apply(queue, removalCandidates(that, point, removeCount));
+            linesToCheck.forEach(function(line) {
+                queue.push.apply(queue, removeCandidates(that, point, removeCount, line.next, line.prev));
+            });
+
             return queue.length ? queue : null;
         }
     });
 
     window.Matrix = Matrix;
 
-    function removalCandidates(matrix, point, removeCount) {
+    function removeCandidates(matrix, point, removeCount, getNext, getPrev) {
         var val = matrix.getValue(point),
+            prev = getPrev(point),
+            next = getNext(point),
             queue = [];
 
-        [['top', 'bottom'], ['left', 'right'], ['bottomLeft', 'topRight'], ['bottomRight', 'topLeft']].forEach(
-            function (item) {
-                var removePoints = [],
-                    next = point[item[1]],
-                    previous = point[item[0]];
-
-                while (matrix.hasPoint(next) && matrix.getValue(next) === val) {
-                    removePoints.push(next);
-                    next = next[item[1]]();
-                }
-
-                while (matrix.hasPoint(previous) && matrix.getValue(previous) === val) {
-                    removePoints.unshift(previous);
-                    previous = previous[item[0]]();
-                }
-                if (removePoints.length + 1 >= removeCount) {
-                    queue.push.apply(queue, removePoints);
-                }
-            });
-        return queue.length ? queue : null;
-    }
-
-    function markIfFree(matrix, point) {
-        if (matrix.hasPoint(point) && !matrix.getValue(point)) {
-            matrix.setValue(point, -1);
-            return true;
+        // todo: make it to be more effective
+        while (matrix.hasPoint(prev) && matrix.getValue(prev) === val) {
+            queue.unshift(prev);
+            prev = getPrev(prev);
         }
-        return false;
+        while (matrix.hasPoint(next) && matrix.getValue(next) === val) {
+            queue.push(next);
+            next = getNext(next);
+        }
+        return queue.length + 1 >= removeCount ? queue : null;
     }
 })();

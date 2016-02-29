@@ -21,23 +21,23 @@
                 item = that.undone.pop();
             return item && that.push(item) && that;
         },
-        addStep: function (step) {
+        addTrace: function (trace) {
             var that = this;
-            if (!step) {
+            if (!(trace instanceof GameTrace)) {
                 throw new Error('Invalid argument');
             }
             that.undone.length = 0;
-            that.push(step);
+            that.push(trace);
 
             return that;
         },
-        getLastStep: function () {
+        getLastTrace: function () {
             var that = this;
             return that[that.length - 1];
         },
         getScore: function () {
             var that = this;
-            return that.getLastStep().score;
+            return that.getLastTrace().score;
         }
     });
     window.GameHistory = GameHistory;

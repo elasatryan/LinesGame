@@ -1,7 +1,11 @@
-$(function () {
-    var gamesFeed = $('.games_feed');
+/**
+ * Created by Hakob on 04/02/2016.
+ */
 
-    $('.generate_game').on('click', function () {
+$(function () {
+    var gamesFeed = $('.games-feed');
+
+    $('.generate-game').on('click', function () {
         $.ajax({
             url: 'templates/linesGame.html'
         }).success(function (template) {

@@ -1,58 +1,32 @@
 (function () {
     'use strict';
 
-    // var staticForEach = Array.prototype.forEach.call;
+    var staticForEach = Array.prototype.forEach.call;
 
-    function GameStep(score, addend, subtrahend) {
+    function GameStep(action, ball) {
         var that = this;
 
-        that.score = +score || 0;
-        that.addend = addend || [];
-        that.subtrahend = subtrahend || [];
+        that.action = action;
+        that.balls = Array.isArray(ball) ? ball : [ball];
     }
 
     $.extend(GameStep.prototype, {
-        addToAddend: function () {
-            var that = this;
+        addBall: function (ball) {
+            var that = this,
+                balls = that.balls;
 
-            that.subtrahend = addToCollection(that.addend, that.subtrahend, arguments);
-
-            return that;
-        },
-        addToSubtrahend: function () {
-            var that = this;
-
-            that.addend = addToCollection(that.subtrahend, that.addend, arguments);
+            balls.push.apply(balls, arguments);
 
             return that;
         },
-        reverse: function () {
+        changeAction: function (action) {
             var that = this;
 
-            if (that._reverse) {
-                return that._reverse;
-            }
+            that.action = action;
 
-            that._reverse = new GameStep(that.score, that.subtrahend, that.addend);
-            that._reverse._reverse = that;
-
-            return that._reverse;
+            return that;
         }
     });
 
     window.GameStep = GameStep;
-
-    function removeRepeatedBall(collection, ball) {
-        return collection.filter(function (item) {
-            return !ball.point.equals(item.point);
-        });
-    }
-
-    function addToCollection(a, b, balls) {
-        Array.forEach(balls, function (item) {
-            b = removeRepeatedBall(b, item);
-            a.push(item);
-        });
-        return b;
-    }
 })();

@@ -1,42 +1,91 @@
-$color_jacarta_approx: #413663;
-$white: #fff;
-$color_anakiwa_approx: #9fddff;
-$color_silver_22_approx: rgba(191, 191, 191, 0.22);
-$black_16: rgba(0, 0, 0, 0.16);
-$black_23: rgba(0, 0, 0, 0.23);
-$color_turquoise_approx: #3cd6d6;
+//colors
+$overlay_bg: rgba(255, 255, 255, .7); // white.7
+$settings_bg: #fff;
+$site_bg: #ccc;
+$black_16: rgba(0, 0, 0, .16);
+$persian_red: #d32f2f;
+$tory_blue: #0d47a1;
+$goblin: #388e3c;
+$fuchsia_pink: #ab47bc;
+$violet_red: #ec407a;
+$cerulean: #03a9f4;
+$button_bg: #3cd6d6;
 
-$icon: url(../images/icons/icon.png);
 
-@import url('https://fonts.googleapis.com/css?family=Roboto');
+@mixin userSelect($value) {
+    -webkit-user-select: $value;
+    -moz-user-select: $value;
+    -ms-user-select: $value;
+    user-select: $value;
+}
+
+@import url("https://fonts.googleapis.com/css?family=Roboto");
 
 body {
-  font-family: roboto, sans-serif;
-  background-color: $color_jacarta_approx;
-  color: $white;
+    font-family: roboto, sans-serif;
+    background-color: $site_bg;
+    color: #fff;
+}
+
+button {
+    background: $button_bg;
+    border: none;
+    border-radius: 2px;
+    color: white;
+    font-weight: bold;
+    height: 40px;
+    line-height: 40px;
+    min-width: 60px;
+    padding: 0 10px;
+    text-align: center;
+    text-transform: uppercase;
+
+    &:focus {
+        outline: none;
+    }
 }
 
 .icon {
-  height: 48px;
-  width: 48px;
-  background-image: $icon;
-  display: inline-block;
+    background: url("../images/icons.png") no-repeat;
+    display: inline-block;
+    height: 36px;
+    width: 36px;
+
+    &.menu {
+        background-position: -2px -2px;
+    }
+
+    &.redo {
+        background-position: -42px -42px;
+    }
+
+    &.undo {
+        background-position: -2px -42px;
+    }
 }
 
-.generate_game {
-  background: $color_turquoise_approx;
-  //Instead of the line below you could use @include border-radius($radius, $vertical-radius)
-  border-radius: 100%;
-  height: 60px;
-  width: 60px;
-  display: block;
-  font-size: 36px;
-  line-height: 60px;
-  text-align: center;
-  position: absolute;
-  right: 20px;
-  bottom: 20px;
-  cursor: pointer;
-  //Instead of the line below you could use @include box-shadow($shadow-1, $shadow-2, $shadow-3, $shadow-4, $shadow-5, $shadow-6, $shadow-7, $shadow-8, $shadow-9, $shadow-10)
-  box-shadow: 0 3px 6px $black_16, 0 3px 6px $black_23;
+label {
+    $padding: 10px;
+    $distance: 10px;
+    $labelWidth: 120px;
+
+    display: block;
+    padding: 0 $padding;
+    white-space: nowrap;
+
+    strong {
+        display: inline-block;
+        text-align: right;
+        width: $labelWidth;
+    }
+
+    > :not(:first-child) {
+        margin-left: $distance;
+    }
+
+    input {
+        &[type="text"] {
+            width: calc(100% - #{$padding + $labelWidth + $distance});
+        }
+    }
 }
