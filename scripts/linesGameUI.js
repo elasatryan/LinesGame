@@ -1,11 +1,12 @@
 (function () {
     'use strict';
     var colors = ['red', 'blue', 'green', 'yellow', 'pink', 'cyan', 'purple'],
+        themes = ['red', 'pink', 'teal'],
         gameActions = {
-            add: function(element, colorName) {
+            add: function (element, colorName) {
                 element.addClass(colorName);
             },
-            remove: function(element) {
+            remove: function (element) {
                 element.removeAttr('class');
             }
         };
@@ -49,6 +50,8 @@
                     }
                 });
 
+            that.addClass(themes[Math.randomInt(themes.length)]);
+
             that.find('.new-game').click(function () {
                 linesGame = initializeGame(board, size, ballsCount, repeat, removingCount);
 
@@ -63,8 +66,11 @@
                 score.text(linesGame.getScore());
             });
             that.find('.redo').click(function () {
-                drawTrace(board,  linesGame.redo());
+                drawTrace(board, linesGame.redo());
                 score.text(linesGame.getScore());
+            });
+            that.find('.delete').click(function () {
+                that.remove();
             });
 
             linesGame = initializeGame(board, size, ballsCount, repeat, removingCount);
@@ -92,7 +98,7 @@
 
         // todo optimize
         trace.forEach(function (step) {
-            step.balls.forEach(function(ball) {
+            step.balls.forEach(function (ball) {
                 var colorName = colors[ball.color - 1],
                     action = gameActions[step.action];
 

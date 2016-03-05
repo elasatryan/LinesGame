@@ -9,7 +9,7 @@ $(function () {
         $.ajax({
             url: 'templates/linesGame.html'
         }).success(function (template) {
-            $(template).appendTo(gamesFeed).linesGame();
+            $(template).prependTo(gamesFeed).linesGame();
         });
     });
 });

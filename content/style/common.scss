@@ -1,7 +1,7 @@
 //colors
 $overlay_bg: rgba(255, 255, 255, .7); // white.7
 $settings_bg: #fff;
-$site_bg: #ccc;
+$site_bg: #D0D0D0;
 $black_16: rgba(0, 0, 0, .16);
 $persian_red: #d32f2f;
 $tory_blue: #0d47a1;
@@ -11,81 +11,86 @@ $violet_red: #ec407a;
 $cerulean: #03a9f4;
 $button_bg: #3cd6d6;
 
-
 @mixin userSelect($value) {
-    -webkit-user-select: $value;
-    -moz-user-select: $value;
-    -ms-user-select: $value;
-    user-select: $value;
+  -webkit-user-select: $value;
+  -moz-user-select: $value;
+  -ms-user-select: $value;
+  user-select: $value;
 }
 
 @import url("https://fonts.googleapis.com/css?family=Roboto");
 
 body {
-    font-family: roboto, sans-serif;
-    background-color: $site_bg;
-    color: #fff;
+  font-family: roboto, sans-serif;
+  background-color: $site_bg;
+  color: #fff;
 }
 
 button {
-    background: $button_bg;
-    border: none;
-    border-radius: 2px;
-    color: white;
-    font-weight: bold;
-    height: 40px;
-    line-height: 40px;
-    min-width: 60px;
-    padding: 0 10px;
-    text-align: center;
-    text-transform: uppercase;
+  background: $button_bg;
+  border: none;
+  border-radius: 2px;
+  color: white;
+  font-weight: bold;
+  height: 40px;
+  line-height: 40px;
+  min-width: 60px;
+  padding: 0 10px;
+  text-align: center;
+  text-transform: uppercase;
 
-    &:focus {
-        outline: none;
-    }
+  &:focus {
+    outline: none;
+  }
 }
 
 .icon {
-    background: url("../images/icons.png") no-repeat;
-    display: inline-block;
-    height: 36px;
-    width: 36px;
+  background: url("../images/icons/icon.png") no-repeat;
+  display: inline-block;
+  height: 48px;
+  width: 48px;
 
-    &.menu {
-        background-position: -2px -2px;
-    }
+  &.menu {
+    background-position: -2px -2px;
+  }
 
-    &.redo {
-        background-position: -42px -42px;
-    }
+  &.redo {
+    background-position: -152px -2px;
+  }
 
-    &.undo {
-        background-position: -2px -42px;
-    }
+  &.undo {
+    background-position: -102px -2px;
+  }
+
+  &.delete {
+    background-position: -202px -2px;
+    float: right;
+  }
+
 }
 
 label {
-    $padding: 10px;
-    $distance: 10px;
-    $labelWidth: 120px;
+  $padding: 10px;
+  $distance: 10px;
+  $labelWidth: 120px;
 
-    display: block;
-    padding: 0 $padding;
-    white-space: nowrap;
+  display: block;
+  padding: 0 $padding;
+  white-space: nowrap;
 
-    strong {
-        display: inline-block;
-        text-align: right;
-        width: $labelWidth;
+  strong {
+    display: inline-block;
+    text-align: right;
+    width: $labelWidth;
+  }
+
+  > :not(:first-child) {
+    margin-left: $distance;
+  }
+
+  input {
+    &[type="text"] {
+      width: calc(100% - #{$padding + $labelWidth + $distance});
     }
-
-    > :not(:first-child) {
-        margin-left: $distance;
-    }
-
-    input {
-        &[type="text"] {
-            width: calc(100% - #{$padding + $labelWidth + $distance});
-        }
-    }
+  }
 }
