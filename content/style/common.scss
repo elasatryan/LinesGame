@@ -69,6 +69,20 @@ button {
 
 }
 
+.tooltip {
+    background: rgba(0,0,0,0.54);
+    padding: 5px;
+    position: absolute;
+    color: #fff;
+    z-index: 100;
+    overflow: hidden;
+    pointer-events: none;
+    border-radius: 4px;
+    font-weight: 500;
+    font-size: 14px;
+}
+
+
 label {
   $padding: 10px;
   $distance: 10px;

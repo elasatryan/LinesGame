@@ -16,6 +16,7 @@
             var that = this;
             var linesGame,
                 selectedElement,
+                f = that.find('.score').tooltip({text: 'sd'}),
                 size = that.find('.size'),
                 ballsCount = that.find('.balls-count'),
                 repeat = that.find('.repeat'),
