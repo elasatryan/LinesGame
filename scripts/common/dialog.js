@@ -22,7 +22,8 @@
                 title: '',
                 closeButton: true
             },
-            destroyOnClose: false
+            destroyOnClose: false,
+            container: null
         };
 
 
@@ -127,7 +128,7 @@
         if (commands.length) {
             commands.forEach(function (item) {
                 var attr = item.attr || {},
-                    className = item.attr['class'];
+                    className = attr['class'];
 
                 delete attr['class'];
 

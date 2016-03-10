@@ -14,9 +14,15 @@
     $.extend($.fn, {
         linesGame: function () {
             var that = this;
+            that.dialog = new Dialog({templateUrl: 'templates/settings.html',
+                commands: [{action: 'new-game', text: 'New Game'}],
+                header: {title: 'Settings', closeButton: true},
+                destroyOnClose: false,
+                container: that
+            });
             var linesGame,
                 selectedElement,
-                f = that.find('.score').tooltip({text: 'sd'}),
+                //f = that.find('.score').tooltip({text: 'sd'}),
                 size = that.find('.size'),
                 ballsCount = that.find('.balls-count'),
                 repeat = that.find('.repeat'),
@@ -60,7 +66,7 @@
             });
             that.find('.menu').click(function () {
                 that.toggleClass('open');
-            });
+            }).click();
 
             that.find('.undo').click(function () {
                 drawTrace(board, linesGame.undo());
@@ -73,8 +79,6 @@
             that.find('.delete').click(function () {
                 that.remove();
             });
-
-            linesGame = initializeGame(board, size, ballsCount, repeat, removingCount);
         }
     });
 
