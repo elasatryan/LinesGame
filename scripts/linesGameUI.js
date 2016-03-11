@@ -1,7 +1,7 @@
 (function () {
     'use strict';
     var colors = ['red', 'blue', 'green', 'yellow', 'pink', 'cyan', 'purple'],
-        themes = ['red','pink','purple','deep-purple','indigo','blue','light-blue','cyan','teal','green','light-green','lime','yellow','amber','orange','deep-orange','brown','grey','blue-grey'],
+        themes = ['red', 'pink', 'purple', 'deep-purple', 'indigo', 'blue', 'light-blue', 'cyan', 'teal', 'green', 'light-green', 'lime', 'yellow', 'amber', 'orange', 'deep-orange', 'brown', 'grey', 'blue-grey'],
         gameActions = {
             add: function (element, colorName) {
                 element.addClass(colorName);
@@ -14,7 +14,8 @@
     $.extend($.fn, {
         linesGame: function () {
             var that = this;
-            that.dialog = new Dialog({templateUrl: 'templates/settings.html',
+            that.dialog = new Dialog({
+                templateUrl: 'templates/settings.html',
                 commands: [{action: 'new-game', text: 'New Game'}],
                 header: {title: 'Settings', closeButton: true},
                 destroyOnClose: false,
@@ -22,11 +23,6 @@
             });
             var linesGame,
                 selectedElement,
-                //f = that.find('.score').tooltip({text: 'sd'}),
-                size = that.find('.size'),
-                ballsCount = that.find('.balls-count'),
-                repeat = that.find('.repeat'),
-                removingCount = that.find('.removing-count'),
                 score = that.find('.score'),
                 board = that.find('.dashboard').on('click', '.ball', function () {
                     var element = $(this);
@@ -59,14 +55,22 @@
 
             that.addClass(themes[Math.randomInt(themes.length)]);
 
-            that.find('.new-game').click(function () {
-                linesGame = initializeGame(board, size, ballsCount, repeat, removingCount);
 
-                that.removeClass('game-over open');
+            that.dialog.on('new-game', function () {
+                linesGame = initializeGame(that, board);
+
+                that.hide();
+                //that.removeClass('open');
             });
             that.find('.menu').click(function () {
-                that.toggleClass('open');
+                var isOpen = that.toggleClass('open').is('.open');
+
+                that.dialog[isOpen ? 'open' : 'close']();
             }).click();
+            that.find('.close').click(function () {
+
+                that.dialog.close();
+            });
 
             that.find('.undo').click(function () {
                 drawTrace(board, linesGame.undo());
@@ -116,7 +120,12 @@
         return 'tr:nth-child(' + (point.row + 1) + ') td:nth-child(' + (point.column + 1) + ')';
     }
 
-    function initializeGame(board, size, ballsCount, repeat, removingCount) {
+    function initializeGame(gameElement, board) {
+        var size = gameElement.find('.size'),
+            ballsCount = gameElement.find('.balls-count'),
+            repeat = gameElement.find('.repeat'),
+            removingCount = gameElement.find('.removing-count');
+
         var linesGame = new LinesGame(initOption(size, ballsCount, repeat, removingCount));
         var options = linesGame.options;
 
