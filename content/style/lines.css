@@ -10,7 +10,7 @@ button:focus { outline: none; }
 .icon.undo { background-position: -102px -2px; }
 .icon.delete { background-position: -202px -2px; float: right; }
 
-.tooltip { background: rgba(0, 0, 0, 0.54); padding: 5px; position: absolute; color: #fff; z-index: 100; overflow: hidden; pointer-events: none; border-radius: 4px; font-weight: 500; font-size: 14px; }
+.tooltip, .toast { background: rgba(0, 0, 0, 0.54); height: 20px; padding: 5px; position: absolute; color: #fff; z-index: 100; overflow: hidden; pointer-events: none; border-radius: 4px; font-weight: 500; font-size: 14px; line-height: 20px; }
 
 label { display: block; padding: 0 10px; white-space: nowrap; }
 label strong { display: inline-block; text-align: right; width: 120px; }
@@ -21,10 +21,11 @@ label input[type="text"] { width: calc(100% - 140px); }
 .games-feed > :not(:first-child) { margin-left: 10px; }
 
 .game { display: inline-block; overflow: hidden; position: relative; text-align: left; margin: 10px; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; }
-.game > header { box-shadow: 0 1px 16px 0 #7B7B7B; height: 48px; overflow: hidden; padding: 0 10px; position: relative; }
+.game > header { box-shadow: 0 1px 16px 0 #7B7B7B; height: 48px; padding: 0 10px; position: relative; }
 .game > header > * { vertical-align: middle; }
 .game .controls { display: inline-block; float: right; height: 48px; line-height: 48px; }
 .game .controls > * { vertical-align: middle; }
+.game .controls [disable] { opacity: .5; }
 .game .score { display: inline-block; margin: 0; min-width: 60px; text-align: center; }
 .game .settings { background: #fff; bottom: 0; box-shadow: 0 0 10px; color: black; height: 200px; left: 0; margin: auto; padding: 10px; position: absolute; right: 0; top: 0; width: 240px; border-radius: 4px; }
 .game .settings-container { background: rgba(255, 255, 255, 0.7); display: none; height: calc(100% - 48px); left: 0; position: absolute; top: 48px; width: 100%; }
@@ -70,4 +71,3 @@ label input[type="text"] { width: calc(100% - 140px); }
 
 @keyframes bitrate { from { transform: scale(1); }
   to { transform: scale(1.05); } }
-.tooltip { position: absolute; z-index: 100; overflow: hidden; pointer-events: none; border-radius: 4px; font-weight: 500; font-size: 14px; }

@@ -76,6 +76,9 @@
         var size = options.size,
             ballsCount = options.ballsCount,
             removingCount = options.removingCount;
+        if(!Number.isInteger(size) || !Number.isInteger(ballsCount) || !Number.isInteger(removingCount)){
+            throw new Error('LinesGame argument is invalid!');
+        }
         if (size < 5 || size > 10) {
             options.size = 9;
         }

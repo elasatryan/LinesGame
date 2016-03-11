@@ -28,4 +28,13 @@
         }
     });
 
+    $.extend($.fn, {
+        disable: function () {
+            return this.attr('disable', 'disable');
+        },
+        enable: function () {
+            return this.removeAttr('disable');
+        }
+    })
+
 })();
