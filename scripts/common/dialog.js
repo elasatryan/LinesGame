@@ -5,11 +5,11 @@
     'use strict';
 
     // from aqurejs
-    var async = function(func) {
+    var async = function (func) {
         setTimeout(func, 0);
     };
 
-    var dialogTemplate = '<div class="overlay"><div class="dialog"><header><span class="title"></span><span class="icon close"></span></header><div class="dialog-content"></div><footer></footer></div></div>',
+    var dialogTemplate = '<div class="overlay"><div class="dialog"><header><div class="icon close"></div><div class="title"></header><div class="dialog-content"></div><footer></footer></div></div>',
         namespace = '.dialog',
         defaultOptions = {
             template: null,
@@ -33,7 +33,7 @@
         //that.options = options = $.extend({}, defaultOptions, options);
         //that.element = $(dialogTemplate).append(options.container || document.body);
         that.options = options = $.extend({}, defaultOptions, options);
-        that.overlay = $(dialogTemplate).appendTo(options.container ||document.body);
+        that.overlay = $(dialogTemplate).appendTo(options.container || document.body);
         that.element = that.overlay.find('.dialog');
         that.content = that.element.find('.dialog-content');
         addHeader(that);
@@ -83,7 +83,7 @@
             };
 
             if (template) {
-                async(function() {
+                async(function () {
                     complete(template);
                 });
             }

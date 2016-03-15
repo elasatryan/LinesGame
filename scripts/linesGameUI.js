@@ -16,7 +16,7 @@
             var that = this;
             that.dialog = new Dialog({
                 templateUrl: 'templates/settings.html',
-                commands: [{action: 'new-game', text: 'New Game'}],
+                commands: [{action: 'new-game', text: 'Apply'}],
                 header: {title: 'Settings', closeButton: true},
                 destroyOnClose: false,
                 container: that
@@ -55,22 +55,23 @@
 
             that.addClass(themes[Math.randomInt(themes.length)]);
 
-
             that.dialog.on('new-game', function () {
                 linesGame = initializeGame(that, board);
+                that.toggleClass('jq-show');
+                that.dialog.close();
 
-                that.hide();
-                //that.removeClass('open');
+                score.text(linesGame.getScore());
+            });
+
+            that.find('.close').click(function () {
+                that.toggleClass('jq-show');
+                that.dialog.close();
             });
             that.find('.menu').click(function () {
-                var isOpen = that.toggleClass('open').is('.open');
+                var isOpen = that.toggleClass('jq-show').is('.jq-show');
 
                 that.dialog[isOpen ? 'open' : 'close']();
             }).click();
-            that.find('.close').click(function () {
-
-                that.dialog.close();
-            });
 
             that.find('.undo').click(function () {
                 drawTrace(board, linesGame.undo());

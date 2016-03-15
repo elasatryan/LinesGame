@@ -12,13 +12,14 @@
 .game {
   $header: 48px;
 
-  width: 550px;
-  height: 515px;
+  min-width: 300px;
+  min-height: 320px;
   display: inline-block;
   overflow: hidden;
   position: relative;
   text-align: left;
   margin: 10px;
+  vertical-align: top;
 
   @include userSelect(none);
 
@@ -90,13 +91,13 @@
     }
   }
 
-  &.open {
+  &.jq-show {
     .icon.menu {
       background-position: -52px -2px;
     }
 
     .overlay {
-      height: 500px;
+      //height: 500px;
     }
   }
 
@@ -122,6 +123,7 @@
   .dashboard {
     border-collapse: collapse;
     background: white;
+    margin: auto;
   }
 
   td {
