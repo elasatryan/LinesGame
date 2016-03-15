@@ -71,6 +71,7 @@ button {
 
 .tooltip, .toast {
   background: rgba(0, 0, 0, 0.54);
+  display: inline-block;
   height: 20px;
   padding: 5px;
   position: absolute;

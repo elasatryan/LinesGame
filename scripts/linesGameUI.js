@@ -52,10 +52,13 @@
                         that.addClass('game-over');
                     }
                 });
-            /*TODO*/
-            size.on('input', function () {
-                var input = size;
-                if(input.val()<input.attr('min') || input.val()>input.attr('max')){
+            /*
+            *Input validations
+            */
+            that.find('.size, .balls-count, .removing-count').on('input', function () {
+                var input = $(this);
+                input.parent().find('.toast').remove();
+                if(+input.val()<+input.attr('min') || +input.val()>+input.attr('max') || !Number.isInteger(+input.val())){
                     new Toast({text:'Invalid value',container:input.parent()});
                 }
             });

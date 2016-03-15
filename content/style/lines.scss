@@ -24,15 +24,18 @@
     height: $header;
     padding: 0 10px;
     position: relative;
+    text-align: center;
 
     > * {
       vertical-align: middle;
+    }
+    .menu {
+      float: left;
     }
   }
 
   .controls {
     display: inline-block;
-    float: right;
     height: $header;
     line-height: $header;
 
