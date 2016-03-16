@@ -3,37 +3,37 @@
     var linesToCheck = [
         // horizontal
         {
-            next: function(point){
+            next: function (point) {
                 return point.right();
             },
-            prev: function(point) {
+            prev: function (point) {
                 return point.left();
             }
         },
         // vertical
         {
-            next: function(point){
+            next: function (point) {
                 return point.bottom();
             },
-            prev: function(point) {
+            prev: function (point) {
                 return point.top();
             }
         },
         // mainDiagonal
         {
-            next: function(point) {
+            next: function (point) {
                 return point.bottomRight();
             },
-            prev: function(point) {
+            prev: function (point) {
                 return point.topLeft();
             }
         },
         // secondaryDiagonal
         {
-            next: function(point) {
+            next: function (point) {
                 return point.topRight();
             },
-            prev: function(point) {
+            prev: function (point) {
                 return point.bottomLeft();
             }
         }
@@ -43,13 +43,27 @@
         var that = this;
 
         that.size = size;
-
-        for (var i = 0; i < size; i++) {
-            that.push(new Array(size));
-        }
     }
 
     Matrix.prototype = [];
+
+    Object.defineProperties(Matrix.prototype, {
+        size: {
+            get: function () {
+                return this.length;
+            },
+            set: function (size) {
+                var that = this;
+
+                that.length = 0;
+
+                that.push.apply(that, new NumberRange(0, size).map(function () {
+                    return new Array(size);
+                }));
+            }
+        }
+    });
+
     $.extend(Matrix.prototype, {
         hasPath: function (startPoint, endPoint) {
             var queue = [startPoint],
@@ -82,7 +96,7 @@
             // todo change to don't clear `clone`
             var clone = new Matrix(that.size);
             clone.length = 0;
-            clone.push.apply(clone,  JSON.clone(that));
+            clone.push.apply(clone, JSON.clone(that));
 
             return clone;
         },
@@ -105,7 +119,7 @@
         removeCandidates: function (point, removeCount) {
             var that = this,
                 queue = [];
-            linesToCheck.forEach(function(line) {
+            linesToCheck.forEach(function (line) {
                 queue.push.apply(queue, removeCandidates(that, point, removeCount, line.next, line.prev));
             });
 

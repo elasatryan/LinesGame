@@ -40,6 +40,7 @@
                     if (!selectedElement) {
                         return;
                     }
+                    that.find('.undo').enable();
 
                     linesGame.moveBall(selectedElement.data('point'), element.data('point'));
                     selectedElement.removeClass('selected');
@@ -48,11 +49,26 @@
                     drawTrace(board, linesGame.history.getLastTrace());
                     score.text(linesGame.getScore());
 
+                    that.find('.redo')[linesGame.history.undone.length ? 'enable' : 'disable']();
+
                     if (linesGame.gameOver()) {
                         that.addClass('game-over');
                     }
                 });
+            /*
+            *Input validations
+            */
+            that.dialog.on('set-content', function() {
+                that.dialog.element.find('.size, .balls-count, .removing-count').on('input', function () {
+                    var input = $(this);
+                    input.parent().find('.input-error').remove();
+                    if(+input.val()<+input.attr('min') || +input.val()>+input.attr('max') || !Number.isInteger(+input.val())){
+                        new Toast({text:'Invalid value',container:input.parent(), class:'input-error'});
+                    }
+                });
+            });
 
+            that.find('.score').tooltip({text: 'Game score'});
             that.addClass(themes[Math.randomInt(themes.length)]);
 
             that.dialog.on('new-game', function () {
@@ -67,21 +83,25 @@
                 that.toggleClass('jq-show');
                 that.dialog.close();
             });
-            that.find('.menu').click(function () {
+            that.find('.menu').tooltip({text: 'Settings'}).click(function () {
                 var isOpen = that.toggleClass('jq-show').is('.jq-show');
 
                 that.dialog[isOpen ? 'open' : 'close']();
             }).click();
 
-            that.find('.undo').click(function () {
+            that.find('.undo').tooltip({text: 'Undo'}).click(function () {
                 drawTrace(board, linesGame.undo());
                 score.text(linesGame.getScore());
+                that.find('.undo')[linesGame.history.length > 1 ? 'enable' : 'disable']();
+                that.find('.redo')[linesGame.history.undone.length ? 'enable' : 'disable']();
             });
-            that.find('.redo').click(function () {
+            that.find('.redo').tooltip({text: 'Redo'}).click(function () {
                 drawTrace(board, linesGame.redo());
                 score.text(linesGame.getScore());
+                that.find('.undo')[linesGame.history.length > 1 ? 'enable' : 'disable']();
+                that.find('.redo')[linesGame.history.undone.length ? 'enable' : 'disable']();
             });
-            that.find('.delete').click(function () {
+            that.find('.delete').tooltip({text: 'Remove Game'}).click(function () {
                 that.remove();
             });
         }
@@ -131,9 +151,12 @@
         var options = linesGame.options;
 
         updateOptionsView(size, ballsCount, removingCount, options);
+
         drawBoard(board, options.size);
 
         drawTrace(board, linesGame.history.getLastTrace());
+
+        gameElement.find('.undo, .redo').disable();
 
         return linesGame;
     }

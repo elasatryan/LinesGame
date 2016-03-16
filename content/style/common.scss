@@ -78,8 +78,10 @@ button {
   }
 }
 
-.tooltip {
+.tooltip, .toast {
   background: rgba(0, 0, 0, 0.54);
+  display: inline-block;
+  height: 20px;
   padding: 5px;
   position: absolute;
   color: #fff;
@@ -89,6 +91,7 @@ button {
   border-radius: 4px;
   font-weight: 500;
   font-size: 14px;
+  line-height: 20px;
 }
 
 .overlay {
@@ -110,9 +113,6 @@ button {
   &.jq-show {
     display: inline-block;
     text-align: center;
-  }
-  &.hide {
-    display: none;
   }
 }
 
@@ -176,4 +176,8 @@ label {
       width: calc(100% - #{$padding + $labelWidth + $distance});
     }
   }
+}
+
+.jq-hide {
+  display: none;
 }

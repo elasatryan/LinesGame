@@ -76,14 +76,20 @@
         var size = options.size,
             ballsCount = options.ballsCount,
             removingCount = options.removingCount;
+        if(!Number.isInteger(size) || !Number.isInteger(ballsCount) || !Number.isInteger(removingCount)){
+            throw new Error('LinesGame argument is invalid!');
+        }
         if (size < 5 || size > 10) {
             options.size = 9;
+            throw new Error('LinesGame argument is invalid!');
         }
         if (ballsCount < 3 || ballsCount > 7) {
             options.ballsCount = 3;
+            throw new Error('LinesGame argument is invalid!');
         }
         if (removingCount < 3 || removingCount > 5) {
             options.removingCount = 3;
+            throw new Error('LinesGame argument is invalid!');
         }
         return options;
     }

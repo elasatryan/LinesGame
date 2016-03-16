@@ -11,12 +11,11 @@ button:focus { outline: none; }
 .icon.delete { background-position: -202px -2px; float: right; }
 .icon.close { height: 20px; position: absolute; width: 20px; top: 5px; left: 5px; background: red; border-radius: 50%; }
 
-.tooltip { background: rgba(0, 0, 0, 0.54); padding: 5px; position: absolute; color: #fff; z-index: 100; overflow: hidden; pointer-events: none; border-radius: 4px; font-weight: 500; font-size: 14px; }
+.tooltip, .toast { background: rgba(0, 0, 0, 0.54); display: inline-block; height: 20px; padding: 5px; position: absolute; color: #fff; z-index: 100; overflow: hidden; pointer-events: none; border-radius: 4px; font-weight: 500; font-size: 14px; line-height: 20px; }
 
 .overlay { display: none; position: absolute; top: 48px; left: 0; width: 100%; height: calc(100% - 48px); background: rgba(255, 255, 255, 0.8); }
 .overlay::before { width: 0; height: 100%; content: ''; display: inline-block; vertical-align: middle; }
 .overlay.jq-show { display: inline-block; text-align: center; }
-.overlay.hide { display: none; }
 
 .dialog { display: inline-block; vertical-align: middle; width: 250px; height: 220px; background: white; color: black; box-shadow: 0 1px 10px; border-radius: 8px; }
 .dialog .title { text-align: center; }
@@ -31,14 +30,18 @@ label input { width: 50px; }
 label > :not(:first-child) { margin-left: 10px; }
 label input[type="text"] { width: calc(100% - 140px); }
 
+.jq-hide { display: none; }
+
 .games-feed { text-align: center; white-space: nowrap; }
 .games-feed > :not(:first-child) { margin-left: 10px; }
 
 .game { min-width: 300px; min-height: 320px; display: inline-block; overflow: hidden; position: relative; text-align: left; margin: 10px; vertical-align: top; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; }
-.game > header { box-shadow: 0 1px 16px 0 #7B7B7B; height: 48px; overflow: hidden; padding: 0 10px; position: relative; }
+.game > header { box-shadow: 0 1px 16px 0 #7B7B7B; height: 48px; padding: 0 10px; position: relative; text-align: center; }
 .game > header > * { vertical-align: middle; }
-.game .controls { display: inline-block; float: right; height: 48px; line-height: 48px; }
+.game > header .menu { float: left; }
+.game .controls { display: inline-block; height: 48px; line-height: 48px; }
 .game .controls > * { vertical-align: middle; }
+.game .controls [disable] { opacity: .5; }
 .game .score { display: inline-block; margin: 0; min-width: 60px; text-align: center; }
 .game .settings { background: #fff; bottom: 0; box-shadow: 0 0 10px; color: black; height: 200px; left: 0; margin: auto; padding: 10px; position: absolute; right: 0; top: 0; width: 240px; border-radius: 4px; }
 .game .settings-container { background: rgba(255, 255, 255, 0.7); display: none; height: calc(100% - 48px); left: 0; position: absolute; top: 48px; width: 100%; }
@@ -86,4 +89,3 @@ label input[type="text"] { width: calc(100% - 140px); }
 
 @keyframes bitrate { from { transform: scale(1); }
   to { transform: scale(1.05); } }
-.tooltip { position: absolute; z-index: 100; overflow: hidden; pointer-events: none; border-radius: 4px; font-weight: 500; font-size: 14px; }

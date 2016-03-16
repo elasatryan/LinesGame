@@ -26,23 +26,28 @@
   > header {
     box-shadow: 0 1px 16px 0 #7B7B7B;
     height: $header;
-    overflow: hidden;
     padding: 0 10px;
     position: relative;
+    text-align: center;
 
     > * {
       vertical-align: middle;
+    }
+    .menu {
+      float: left;
     }
   }
 
   .controls {
     display: inline-block;
-    float: right;
     height: $header;
     line-height: $header;
 
     > * {
       vertical-align: middle;
+    }
+    [disable] {
+      opacity: .5;
     }
   }
 
@@ -220,14 +225,4 @@
   to {
     transform: scale(1.05);
   }
-}
-
-.tooltip {
-    position: absolute;
-    z-index: 100;
-    overflow: hidden;
-    pointer-events: none;
-    border-radius: 4px;
-    font-weight: 500;
-    font-size: 14px;
 }
