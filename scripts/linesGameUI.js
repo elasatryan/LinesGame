@@ -13,13 +13,16 @@
 
     $.extend($.fn, {
         linesGame: function () {
-            var that = this,
-                linesGame,
+            var that = this;
+            that.dialog = new Dialog({
+                templateUrl: 'templates/settings.html',
+                commands: [{action: 'new-game', text: 'Apply'}],
+                header: {title: 'Settings', closeButton: true},
+                destroyOnClose: false,
+                container: that
+            });
+            var linesGame,
                 selectedElement,
-                size = that.find('.size'),
-                ballsCount = that.find('.balls-count'),
-                repeat = that.find('.repeat'),
-                removingCount = that.find('.removing-count'),
                 score = that.find('.score'),
                 board = that.find('.dashboard').on('click', '.ball', function () {
                     var element = $(this);
@@ -66,15 +69,25 @@
             that.find('.score').tooltip({text: 'Game score'});
             that.addClass(themes[Math.randomInt(themes.length)]);
 
-            that.find('.new-game').click(function () {
+            that.dialog.on('new-game', function () {
+                linesGame = initializeGame(that, board);
+                that.toggleClass('jq-show');
+                that.dialog.close();
 
-                linesGame = initializeGame(that, board, size, ballsCount, repeat, removingCount);
-                that.removeClass('game-over open');
+                score.text(linesGame.getScore());
+            });
+
+            that.find('.close').click(function () {
+                that.toggleClass('jq-show');
+                that.dialog.close();
             });
             that.find('.menu').tooltip({text: 'Settings'}).click(function () {
-                that.toggleClass('open');
-            });
-            that.find('.undo').tooltip({text: 'Undo'}).click(function () {
+                var isOpen = that.toggleClass('jq-show').is('.jq-show');
+
+                that.dialog[isOpen ? 'open' : 'close']();
+            }).click();
+
+            that.find('.undo').click(function () {
                 drawTrace(board, linesGame.undo());
                 score.text(linesGame.getScore());
                 that.find('.undo')[linesGame.history.length > 1 ? 'enable' : 'disable']();
@@ -89,8 +102,6 @@
             that.find('.delete').tooltip({text: 'Remove Game'}).click(function () {
                 that.remove();
             });
-
-            linesGame = initializeGame(that, board, size, ballsCount, repeat, removingCount);
         }
     });
 
@@ -128,7 +139,12 @@
         return 'tr:nth-child(' + (point.row + 1) + ') td:nth-child(' + (point.column + 1) + ')';
     }
 
-    function initializeGame(element, board, size, ballsCount, repeat, removingCount) {
+    function initializeGame(gameElement, board) {
+        var size = gameElement.find('.size'),
+            ballsCount = gameElement.find('.balls-count'),
+            repeat = gameElement.find('.repeat'),
+            removingCount = gameElement.find('.removing-count');
+
         var linesGame = new LinesGame(initOption(size, ballsCount, repeat, removingCount));
         var options = linesGame.options;
 
@@ -138,7 +154,7 @@
 
         drawTrace(board, linesGame.history.getLastTrace());
 
-        element.find('.undo, .redo').disable();
+        gameElement.find('.undo, .redo').disable();
 
         return linesGame;
     }

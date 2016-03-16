@@ -12,11 +12,15 @@
 .game {
   $header: 48px;
 
+  min-width: 300px;
+  min-height: 320px;
   display: inline-block;
   overflow: hidden;
   position: relative;
   text-align: left;
   margin: 10px;
+  vertical-align: top;
+
   @include userSelect(none);
 
   > header {
@@ -92,18 +96,18 @@
     }
   }
 
-  &.open {
+  &.jq-show {
     .icon.menu {
       background-position: -52px -2px;
     }
 
-    .settings-container {
-      display: block;
+    .overlay {
+      //height: 500px;
     }
   }
 
   &.game-over {
-    .settings-container {
+    .dialog {
       display: block;
 
       &::before {
@@ -112,13 +116,19 @@
     }
   }
 }
-
+.open {
+  display: inline-block;
+  .overlay {
+    position: absolute;
+  }
+}
 .lines-game {
   box-shadow: 0 1px 16px 0 #9A9797;
   border-radius: 8px;
   .dashboard {
     border-collapse: collapse;
     background: white;
+    margin: auto;
   }
 
   td {

@@ -5,11 +5,11 @@
     'use strict';
 
     // from aqurejs
-    var async = function(func) {
+    var async = function (func) {
         setTimeout(func, 0);
     };
 
-    var dialogTemplate = '<div class="dialog"><header><span class="title"></span><span class="icon close"></span></header><div class="dialog-content"></div><footer></footer></div>',
+    var dialogTemplate = '<div class="overlay"><div class="dialog"><header><div class="icon close"></div><div class="title"></header><div class="dialog-content"></div><footer></footer></div></div>',
         namespace = '.dialog',
         defaultOptions = {
             template: null,
@@ -22,15 +22,20 @@
                 title: '',
                 closeButton: true
             },
-            destroyOnClose: false
+            destroyOnClose: false,
+            container: null
         };
 
 
     function Dialog(options) {
         var that = this;
 
-        that.element = $(dialogTemplate);
-        that.options = $.extend({}, defaultOptions, options);
+        //that.options = options = $.extend({}, defaultOptions, options);
+        //that.element = $(dialogTemplate).append(options.container || document.body);
+        that.options = options = $.extend({}, defaultOptions, options);
+        that.overlay = $(dialogTemplate).appendTo(options.container || document.body);
+        that.element = that.overlay.find('.dialog');
+        that.content = that.element.find('.dialog-content');
         addHeader(that);
         addFooter(that);
     }
@@ -39,6 +44,7 @@
         on: function () {
             var that = this,
                 element = that.element;
+
             arguments[0] += namespace;
             element.on.apply(element, arguments);
             return that;
@@ -71,12 +77,13 @@
                 templateUrl = options.templateUrl;
 
             var complete = function (template) {
-                that.element.find('.dialog-content').append(template);
+                that.content.html(template);
+                that.overlay.show();
                 that.trigger('set-content');
             };
 
             if (template) {
-                async(function() {
+                async(function () {
                     complete(template);
                 });
             }
@@ -86,6 +93,7 @@
                 }).success(complete);
             }
 
+            //that.overlay.toggleClass('open');
             that.trigger('open');
 
             return that;
@@ -96,7 +104,8 @@
                 element = that.element,
                 destroyOnClose = that.options.destroyOnClose;
 
-            element[destroyOnClose ? 'remove' : 'hide']();
+            that.overlay.hide();
+            /*element[destroyOnClose ? 'remove' : 'hide']();*/
 
             that.trigger('close');
         }
@@ -127,7 +136,7 @@
         if (commands.length) {
             commands.forEach(function (item) {
                 var attr = item.attr || {},
-                    className = item.attr['class'];
+                    className = attr['class'];
 
                 delete attr['class'];
 

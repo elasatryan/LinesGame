@@ -67,6 +67,15 @@ button {
     float: right;
   }
 
+  &.close {
+    height: 20px;
+    position: absolute;
+    width: 20px;
+    top: 5px;
+    left: 5px;
+    background: red;
+    border-radius: 50%;
+  }
 }
 
 .tooltip, .toast {
@@ -85,6 +94,64 @@ button {
   line-height: 20px;
 }
 
+.overlay {
+  display: none;
+  position: absolute;
+  top: 48px;
+  left: 0;
+  width: 100%;
+  height: calc(100% - 48px);
+  background: rgba(255, 255, 255, .8);
+
+  &::before {
+    width: 0;
+    height: 100%;
+    content: '';
+    display: inline-block;
+    vertical-align: middle;
+  }
+  &.jq-show {
+    display: inline-block;
+    text-align: center;
+  }
+  &.hide {
+    display: none;
+  }
+}
+
+.dialog {
+  display: inline-block;
+  vertical-align: middle;
+  width: 250px;
+  height: 220px;
+  background: white;
+  color: black;
+  box-shadow: 0 1px 10px;
+  border-radius: 8px;
+
+  .title {
+    text-align: center;
+  }
+  header {
+    position: relative;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    background: #cdcdcd;
+    padding: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, .26);
+  }
+  strong {
+    padding: 5px;
+  }
+  footer {
+    text-align: right;
+    margin: 5px;
+  }
+  .dialog-content {
+    padding: 10px;
+  }
+}
+
 label {
   $padding: 10px;
   $distance: 10px;
@@ -98,6 +165,9 @@ label {
     display: inline-block;
     text-align: right;
     width: $labelWidth;
+  }
+  input {
+    width: 50px;
   }
 
   > :not(:first-child) {
