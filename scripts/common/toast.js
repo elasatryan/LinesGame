@@ -19,7 +19,7 @@
         that.element = $('<div class="toast"></div>').text(that.options.text).appendTo(container).css({
             left: options.left,
             top: options.top
-        });
+        }).addClass(that.options.class);
         /*options.time && setTimeout(function () {
          el.remove();//todo
          }, options.time);*/

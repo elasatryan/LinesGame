@@ -5,7 +5,6 @@
     };
 
     function getOptionsFromElement(element) {
-        var that = this;
         return {
             text: element.attr('title')
         };

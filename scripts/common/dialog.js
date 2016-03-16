@@ -79,7 +79,7 @@
             var complete = function (template) {
                 that.content.html(template);
                 that.overlay.show();
-                that.trigger('set-content');
+                    that.trigger('set-content');
             };
 
             if (template) {

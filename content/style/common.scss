@@ -114,9 +114,6 @@ button {
     display: inline-block;
     text-align: center;
   }
-  &.hide {
-    display: none;
-  }
 }
 
 .dialog {
@@ -179,4 +176,8 @@ label {
       width: calc(100% - #{$padding + $labelWidth + $distance});
     }
   }
+}
+
+.jq-hide {
+  display: none;
 }

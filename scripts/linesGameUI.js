@@ -58,12 +58,14 @@
             /*
             *Input validations
             */
-            that.find('.size, .balls-count, .removing-count').on('input', function () {
-                var input = $(this);
-                input.parent().find('.toast').remove();
-                if(+input.val()<+input.attr('min') || +input.val()>+input.attr('max') || !Number.isInteger(+input.val())){
-                    new Toast({text:'Invalid value',container:input.parent()});
-                }
+            that.dialog.on('set-content', function() {
+                that.dialog.element.find('.size, .balls-count, .removing-count').on('input', function () {
+                    var input = $(this);
+                    input.parent().find('.input-error').remove();
+                    if(+input.val()<+input.attr('min') || +input.val()>+input.attr('max') || !Number.isInteger(+input.val())){
+                        new Toast({text:'Invalid value',container:input.parent(), class:'input-error'});
+                    }
+                });
             });
 
             that.find('.score').tooltip({text: 'Game score'});
@@ -87,7 +89,7 @@
                 that.dialog[isOpen ? 'open' : 'close']();
             }).click();
 
-            that.find('.undo').click(function () {
+            that.find('.undo').tooltip({text: 'Undo'}).click(function () {
                 drawTrace(board, linesGame.undo());
                 score.text(linesGame.getScore());
                 that.find('.undo')[linesGame.history.length > 1 ? 'enable' : 'disable']();

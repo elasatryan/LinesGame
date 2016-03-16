@@ -3,6 +3,12 @@
   <component name="ChangeListManager">
     <list default="true" id="0e156516-fdf6-48b8-b32c-b9d542de17b8" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/content/style/common.scss" afterPath="$PROJECT_DIR$/content/style/common.scss" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/content/style/lines.css" afterPath="$PROJECT_DIR$/content/style/lines.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/common/dialog.js" afterPath="$PROJECT_DIR$/scripts/common/dialog.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/common/toast.js" afterPath="$PROJECT_DIR$/scripts/common/toast.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/common/tooltip.js" afterPath="$PROJECT_DIR$/scripts/common/tooltip.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/linesGameUI.js" afterPath="$PROJECT_DIR$/scripts/linesGameUI.js" />
     </list>
     <ignored path="lines.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -27,7 +33,7 @@
         <entry file="file://$PROJECT_DIR$/scripts/common/dialog.js">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="22" column="33" selection-start-line="22" selection-start-column="33" selection-end-line="22" selection-end-column="33" />
+              <caret line="81" column="45" selection-start-line="81" selection-start-column="38" selection-end-line="81" selection-end-column="45" />
               <folding>
                 <element signature="e#1432#1627#0" expanded="false" />
                 <element signature="e#1654#1849#0" expanded="false" />
@@ -36,11 +42,21 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="jquery.extensions.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/scripts/common/jquery.extensions.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="7" column="67" selection-start-line="7" selection-start-column="67" selection-end-line="7" selection-end-column="67" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="common.scss" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/content/style/common.scss">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-5.4">
-              <caret line="155" column="0" selection-start-line="155" selection-start-column="0" selection-end-line="155" selection-end-column="0" />
+            <state vertical-scroll-proportion="-6.0">
+              <caret line="178" column="1" selection-start-line="178" selection-start-column="1" selection-end-line="178" selection-end-column="1" />
               <folding />
             </state>
           </provider>
@@ -49,6 +65,16 @@
       <file leaf-file-name="lines.scss" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/content/style/lines.scss">
           <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-67.586205">
+              <caret line="98" column="5" selection-start-line="98" selection-start-column="4" selection-end-line="98" selection-end-column="5" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="settings.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/templates/settings.html">
+          <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="-0.0">
               <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
@@ -56,34 +82,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="linesGameUI.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="linesGameUI.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/scripts/linesGameUI.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.61764705">
-              <caret line="34" column="33" selection-start-line="34" selection-start-column="33" selection-end-line="34" selection-end-column="33" />
-              <folding>
-                <element signature="e#4892#5092#0" expanded="false" />
-                <element signature="e#5167#5300#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/index.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-0.0">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="linesGame.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/templates/linesGame.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-7.1923075">
-              <caret line="11" column="6" selection-start-line="11" selection-start-column="6" selection-end-line="11" selection-end-column="6" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="63" column="53" selection-start-line="63" selection-start-column="53" selection-end-line="63" selection-end-column="53" />
               <folding />
             </state>
           </provider>
@@ -92,38 +95,38 @@
       <file leaf-file-name="linesGame.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/scripts/linesGame.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="24" column="0" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
+            <state vertical-scroll-proportion="-9.655172">
+              <caret line="83" column="62" selection-start-line="83" selection-start-column="0" selection-end-line="84" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="extension.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/scripts/common/extension.js">
+      <file leaf-file-name="tooltip.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/scripts/common/tooltip.js">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <caret line="6" column="45" selection-start-line="6" selection-start-column="45" selection-end-line="6" selection-end-column="45" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="gameTrace.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/scripts/common/gameTrace.js">
+      <file leaf-file-name="toast.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/scripts/common/toast.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.48526862">
+              <caret line="20" column="25" selection-start-line="20" selection-start-column="25" selection-end-line="20" selection-end-column="25" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="range.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/scripts/common/range.js">
+      <file leaf-file-name="linesGame.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/templates/linesGame.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+            <state vertical-scroll-proportion="-7.586207">
+              <caret line="11" column="6" selection-start-line="11" selection-start-column="6" selection-end-line="11" selection-end-column="6" />
               <folding />
             </state>
           </provider>
@@ -170,16 +173,17 @@
         <option value="$PROJECT_DIR$/scripts/common/extension.js" />
         <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/content/style/common.css" />
-        <option value="$PROJECT_DIR$/scripts/common/tooltip.js" />
         <option value="$PROJECT_DIR$/templates/linesGame.html" />
-        <option value="$PROJECT_DIR$/scripts/common/jquery.extensions.js" />
         <option value="$PROJECT_DIR$/index.html" />
         <option value="$PROJECT_DIR$/content/style/lines.css.map" />
         <option value="$PROJECT_DIR$/content/style/lines.css" />
         <option value="$PROJECT_DIR$/content/style/lines.scss" />
-        <option value="$PROJECT_DIR$/scripts/common/dialog.js" />
+        <option value="$PROJECT_DIR$/scripts/common/tooltip.js" />
+        <option value="$PROJECT_DIR$/scripts/common/jquery.extensions.js" />
         <option value="$PROJECT_DIR$/content/style/common.scss" />
         <option value="$PROJECT_DIR$/scripts/linesGameUI.js" />
+        <option value="$PROJECT_DIR$/scripts/common/dialog.js" />
+        <option value="$PROJECT_DIR$/scripts/common/toast.js" />
       </list>
     </option>
   </component>
@@ -373,20 +377,6 @@
               <option name="myItemId" value="" />
               <option name="myItemType" value="" />
             </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="templates">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT USER_OBJECT="Root">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="LinesGame">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
             <PATH_ELEMENT USER_OBJECT="scripts">
               <option name="myItemId" value="" />
               <option name="myItemType" value="" />
@@ -479,21 +469,21 @@
     <property name="settings.editor.splitter.proportion" value="0.2" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="HbShouldOpenHtmlAsHb" value="" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth0" value="143" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth0" value="142" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder0" value="0" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth1" value="172" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth1" value="170" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder1" value="1" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth2" value="173" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth2" value="171" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder2" value="2" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth3" value="848" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth3" value="840" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder3" value="3" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth0" value="166" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth0" value="164" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder0" value="0" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth1" value="164" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth1" value="163" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder1" value="1" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth2" value="166" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth2" value="164" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder2" value="2" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth3" value="840" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth3" value="832" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder3" value="3" />
     <property name="two.files.diff.last.used.folder" value="$USER_HOME$/Downloads/LinesGame-master" />
     <property name="js-jscs-nodeInterpreter" value="C:\Program Files\nodejs\node.exe" />
@@ -611,7 +601,13 @@
       <option name="project" value="LOCAL" />
       <updated>1458057448513</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Merge Elen's branch&#10;">
+      <created>1458138060791</created>
+      <option name="number" value="00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1458138060791</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TodoView">
@@ -667,7 +663,8 @@
     <MESSAGE value="Merge branch 'pr/3'&#10;g branch 'origin/pr/3'&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml&#10;#&#9;content/style/common.scss&#10;#&#9;content/style/lines.css&#10;#&#9;index.html&#10;#&#9;scripts/common/gameHistory.js&#10;#&#9;scripts/common/point.js&#10;#&#9;scripts/extension.js&#10;#&#9;scripts/gameStep.js&#10;#&#9;scripts/linesGame.js&#10;#&#9;scripts/matrix.js&#10;#&#9;scripts/pool.js&#10;#&#9;scripts/viewManager.js&#10;#&#9;templates/linesGame.html&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml&#10;#&#9;content/style/common.scss&#10;#&#9;content/style/lines.css&#10;#&#9;index.html&#10;#&#9;scripts/common/extension.js&#10;#&#9;scripts/common/gameHistory.js&#10;#&#9;scripts/common/matrix.js&#10;#&#9;scripts/common/point.js&#10;#&#9;scripts/common/pool.js&#10;#&#9;scripts/gameStep.js&#10;#&#9;scripts/linesGame.js&#10;#&#9;scripts/viewManager.js&#10;#&#9;templates/linesGame.html&#10;" />
     <MESSAGE value="Added dialog/overlay&#10;" />
     <MESSAGE value="Fixed dialog bugs" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fixed dialog bugs" />
+    <MESSAGE value="Merge Elen's branch&#10;" />
+    <option name="LAST_COMMIT_MESSAGE" value="Merge Elen's branch&#10;" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -928,29 +925,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/common/jquery.extensions.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="2" column="3" selection-start-line="2" selection-start-column="3" selection-end-line="2" selection-end-column="3" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/common/tooltip.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/settings.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="16" column="0" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/content/images/icons/icon.png">
       <provider selected="true" editor-type-id="images">
         <state />
@@ -965,14 +939,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-0.0">
           <caret line="3" column="0" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/linesGame.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="24" column="0" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -993,14 +959,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/common/range.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/index.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-0.0">
@@ -1009,26 +967,66 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/linesGame.html">
+    <entry file="file://$PROJECT_DIR$/content/style/lines.scss">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-7.1923075">
-          <caret line="11" column="6" selection-start-line="11" selection-start-column="6" selection-end-line="11" selection-end-column="6" />
+        <state vertical-scroll-proportion="-67.586205">
+          <caret line="98" column="5" selection-start-line="98" selection-start-column="4" selection-end-line="98" selection-end-column="5" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/content/style/lines.scss">
+    <entry file="file://$PROJECT_DIR$/scripts/common/tooltip.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="6" column="45" selection-start-line="6" selection-start-column="45" selection-end-line="6" selection-end-column="45" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/common/jquery.extensions.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="7" column="67" selection-start-line="7" selection-start-column="67" selection-end-line="7" selection-end-column="67" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/content/style/common.scss">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-5.4">
-          <caret line="155" column="0" selection-start-line="155" selection-start-column="0" selection-end-line="155" selection-end-column="0" />
+        <state vertical-scroll-proportion="-6.0">
+          <caret line="178" column="1" selection-start-line="178" selection-start-column="1" selection-end-line="178" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/settings.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/linesGame.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-7.586207">
+          <caret line="11" column="6" selection-start-line="11" selection-start-column="6" selection-end-line="11" selection-end-column="6" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/linesGame.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-9.655172">
+          <caret line="83" column="62" selection-start-line="83" selection-start-column="0" selection-end-line="84" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/linesGameUI.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="63" column="53" selection-start-line="63" selection-start-column="53" selection-end-line="63" selection-end-column="53" />
           <folding />
         </state>
       </provider>
@@ -1036,7 +1034,7 @@
     <entry file="file://$PROJECT_DIR$/scripts/common/dialog.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="22" column="33" selection-start-line="22" selection-start-column="33" selection-end-line="22" selection-end-column="33" />
+          <caret line="81" column="45" selection-start-line="81" selection-start-column="38" selection-end-line="81" selection-end-column="45" />
           <folding>
             <element signature="e#1432#1627#0" expanded="false" />
             <element signature="e#1654#1849#0" expanded="false" />
@@ -1044,14 +1042,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/linesGameUI.js">
+    <entry file="file://$PROJECT_DIR$/scripts/common/toast.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.61764705">
-          <caret line="34" column="33" selection-start-line="34" selection-start-column="33" selection-end-line="34" selection-end-column="33" />
-          <folding>
-            <element signature="e#4892#5092#0" expanded="false" />
-            <element signature="e#5167#5300#0" expanded="false" />
-          </folding>
+        <state vertical-scroll-proportion="0.48526862">
+          <caret line="20" column="25" selection-start-line="20" selection-start-column="25" selection-end-line="20" selection-end-column="25" />
+          <folding />
         </state>
       </provider>
     </entry>
