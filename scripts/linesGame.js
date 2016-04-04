@@ -28,7 +28,7 @@
             var that = this,
                 dashboard = that.dashboard;
 
-            if (!dashboard.hasPath(startPoint, endPoint)) {
+            if (!dashboard.findPath(startPoint, endPoint)) {
                 return;
             }
 

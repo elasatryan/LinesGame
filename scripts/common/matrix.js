@@ -65,27 +65,36 @@
     });
 
     $.extend(Matrix.prototype, {
-        hasPath: function (startPoint, endPoint) {
-            var queue = [startPoint],
+        findPath: function (startPoint, endPoint) {
+            var queue = [{
+                    current: startPoint,
+                    previous: null
+                }],
                 current,
                 clone = this.clone();
 
             while (queue.length) {
-                current = queue.shift();
+                current = queue.shift().current;
 
                 var some = [current.top(), current.right(), current.left(), current.bottom()].some(function (point) {
                     if (point.equals(endPoint)) {
                         return true;
                     }
 
-                    if (clone.hasPoint(point) && !clone.getValue(point)) {
-                        queue.push(point);
+                    if (clone.hasPoint(point) && null === clone.getValue(point)) {
+                        queue.push({
+                            current: point,
+                            previous: current
+                        });
                         clone.setValue(point, -1);
                     }
                 });
 
                 if (some) {
-                    return true;
+                    return destinationToPath({
+                        current: endPoint,
+                        previous: current
+                    });
                 }
             }
             return false;
@@ -145,5 +154,17 @@
             next = getNext(next);
         }
         return queue.length + 1 >= removeCount ? queue : null;
+    }
+
+    function destinationToPath(destination) {
+        var queue = [],
+            current = destination.current;
+
+        while (current.previous) {
+            queue.push(current.current);
+            current = current.previous;
+        }
+
+        return queue;
     }
 })();

@@ -18,7 +18,7 @@ button:focus { outline: none; }
 .overlay.jq-show { display: inline-block; text-align: center; }
 
 .dialog { display: inline-block; vertical-align: middle; width: 250px; height: 220px; background: white; color: black; box-shadow: 0 1px 10px; border-radius: 8px; }
-.dialog .title { text-align: center; }
+.dialog .title {text-align: left;}
 .dialog header { position: relative; border-top-left-radius: 8px; border-top-right-radius: 8px; background: #cdcdcd; padding: 5px; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.26); }
 .dialog strong { padding: 5px; }
 .dialog footer { text-align: right; margin: 5px; }
