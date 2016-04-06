@@ -116,12 +116,14 @@
     }
   }
 }
+
 .open {
   display: inline-block;
   .overlay {
     position: absolute;
   }
 }
+
 .lines-game {
   box-shadow: 0 1px 16px 0 #9A9797;
   border-radius: 8px;
@@ -175,7 +177,12 @@
             cyan: $cerulean,
             yellow: #ffb200
     );
-
+    &.joker::after {
+      background: linear-gradient(320deg, #388e3c, #03a9f4, #0d47a1, #d32f2f, #ffb200, #ec407a);
+      background-size: 800% 800%;
+      animation: changeColors 1s infinite;
+    }
+  ;
     &::after {
       border-radius: 100%;
       box-shadow: 0 2px 8px -3px #232323;
@@ -224,5 +231,29 @@
   }
   to {
     transform: scale(1.05);
+  }
+}
+
+@keyframes changeColors {
+  0% {
+    background-position: 0 5%;
+  }
+  10% {
+    background-position: 0 8%;
+  }
+  25% {
+    background-position: 50% 10%;
+  }
+  50% {
+    background-position: 100% 24%;
+  }
+  75% {
+    background-position: 50% 10%;
+  }
+  90% {
+    background-position: 25% 5%;
+  }
+  100% {
+    background-position: 0 77%;
   }
 }

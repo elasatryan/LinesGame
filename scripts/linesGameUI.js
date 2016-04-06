@@ -1,6 +1,6 @@
 (function () {
     'use strict';
-    var colors = ['red', 'blue', 'green', 'yellow', 'pink', 'cyan', 'purple'],
+    var colors = ['joker', 'red', 'blue', 'green', 'yellow', 'pink', 'cyan', 'purple'],
         themes = ['red', 'pink', 'purple', 'deep-purple', 'indigo', 'blue', 'light-blue', 'cyan', 'teal', 'green', 'light-green', 'lime', 'yellow', 'amber', 'orange', 'deep-orange', 'brown', 'grey', 'blue-grey'],
         gameActions = {
             add: function (element, colorName) {
@@ -129,7 +129,7 @@
         // todo optimize
         trace.forEach(function (step) {
             step.balls.forEach(function (ball) {
-                var colorName = colors[ball.color - 1],
+                var colorName = colors[ball.color],
                     action = gameActions[step.action];
 
                 action(board.find(getPointSelector(ball.point)), 'ball ' + colorName);

@@ -57,14 +57,14 @@
         },
         redo: function () {
             var that = this;
-            return that.history.redo() && modifyGameByTrace(that,  that.history.getLastTrace());
+            return that.history.redo() && modifyGameByTrace(that, that.history.getLastTrace());
         }
     });
 
     function getRandomColors(count, repeat) {
         var queue = [];
         while (queue.length < count) {
-            var color = Math.randomInt(maxColorsCount) + 1;
+            var color = Math.randomInt(maxColorsCount);
             if (repeat || queue.indexOf(color) < 0) {
                 queue.push(color);
             }
@@ -76,7 +76,7 @@
         var size = options.size,
             ballsCount = options.ballsCount,
             removingCount = options.removingCount;
-        if(!Number.isInteger(size) || !Number.isInteger(ballsCount) || !Number.isInteger(removingCount)){
+        if (!Number.isInteger(size) || !Number.isInteger(ballsCount) || !Number.isInteger(removingCount)) {
             throw new Error('LinesGame argument is invalid!');
         }
         if (size < 5 || size > 10) {
@@ -120,7 +120,10 @@
             trace = linesGame.history.getLastTrace(),
             point = ball.point,
             color = ball.color,
+            getJoker = color == 0 ? true : false,
             removingCount = linesGame.options.removingCount;
+
+        console.log(getJoker)
 
         freeCells.remove(point);
         dashboard.setValue(point, color);
@@ -168,7 +171,7 @@
 
         trace.forEach(function (step) {
             var isAdd = step.action === gameActions.add;
-            step.balls.forEach(function(ball) {
+            step.balls.forEach(function (ball) {
 
                 dashboard.setValue(ball.point, isAdd ? ball.color : undefined);
                 isAdd ? freeCells.remove(ball.point) : freeCells.add(ball.point);

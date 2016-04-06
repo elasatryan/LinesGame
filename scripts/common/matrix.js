@@ -129,10 +129,11 @@
 
     window.Matrix = Matrix;
 
-    function removeCandidates(matrix, point, removeCount, getNext, getPrev) {
+    function removeCandidates(matrix, point, removeCount, getNext, getPrev, getJoker) {
         var val = matrix.getValue(point),
             prev = getPrev(point),
             next = getNext(point),
+            getJoker = matrix.getValue(point) == 0 ? 0 : val,
             queue = [];
 
         // todo: make it to be more effective
@@ -144,6 +145,7 @@
             queue.push(next);
             next = getNext(next);
         }
+
         return queue.length + 1 >= removeCount ? queue : null;
     }
 })();
